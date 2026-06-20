@@ -1,4 +1,6 @@
 /// @description Draw wheel
+
+/*
 draw_circle(x, y, 100, true);
 
 // Draw filled slice for chosen ability
@@ -36,3 +38,5 @@ var _needle_angle = degtorad(current_probability * 360);
 draw_set_color(c_red);
 draw_line(x, y, x + cos(_needle_angle) * 100, y - sin(_needle_angle) * 100);
 draw_set_color(c_yellow);
+
+//*/
