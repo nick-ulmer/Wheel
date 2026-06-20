@@ -5,7 +5,7 @@ image_speed = 0;
 image_index = 0;
 
 // Ledges on the ground
-ledge = 8;
+ledge = 4;
 didLedge = false; // Was a ledge initiated on the previous script step? 
 minStep = 1; // smallest size of ledge
 
@@ -14,16 +14,15 @@ x_move = 0; // horizontal movement input after calculation
 y_move = 0; // vertical movement input after calculation
 spd = 8; // max horizontal movement input
 
-wspd = 8;
-rspd = 16;
+wspd = 8; // walk speed
+rspd = 16; // run speed
 
 // Jump
-//j_move = 0; // Jumping input
 jspd = 10; // The jumping velocity
 jumpTimeMax = 10;
 jumpTime = jumpTimeMax; // Time after initiating jump to hold jump button to go higher. 
 
-jumpTimerMax = 500; //Unused?
+jumpTimerMax = 500; //
 jumpTimer = jumpTimerMax; // Time when spacebar can be held before a jump can be queued
 
 jump_keyPressed = false;

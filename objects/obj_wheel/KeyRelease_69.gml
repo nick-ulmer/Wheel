@@ -3,6 +3,9 @@
 //show_debug_message(abilities);
 
 var _probs = get_ability_probabilities();
+if (array_length(_probs) == 0) return; // GUARD CLAUSE: Don't spin wheel if no enabled abilities! 
+
+
 current_probability = random(1);
 
 var _cumulative = 0;

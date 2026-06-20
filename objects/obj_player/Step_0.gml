@@ -13,7 +13,7 @@ if xs[force.move] > spd {
 
 if(keyboard_check(shift_key)){
 	spd=rspd
-}else{
+} else {
 	spd=wspd
 }
 

@@ -3,12 +3,17 @@
 current_probability = 0;
 choice_index = 0;
 
-
 // obj_wheel Create Event
-abilities = [new Ability("Fireball", 1)]; // test ability
+abilities = [
+	new Ability("High Gravity", 1),
+	new Ability("Low Gravity", 1),
+	new Ability("Speed Boost", 1),
+	new Ability("Explode", 1),
+	new Ability("Slippery", 1)
+];
 
 wheel_surf = -1;
-size = 200;
+size = 200; // width/height of surface space
 
 build_ability_panel = function() {
     if (ui_exists("Panel_Abilities")) {
@@ -21,97 +26,37 @@ build_ability_panel = function() {
 	}
 
     var _panel = new UIPanel("Panel_Abilities", 0, 0, 500, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_LEFT);
-
-    // Add/Remove row -------------------------------------------------------------------
-    var _add_group = new UIGroup("Group_AddAbility", 0, 40, 480, 50, undefined);
-
-    var _textbox = new UITextBox("TextBox_AbilityName", 0, 0, 200, 20, red_button00);
-    _textbox.setPlaceholderText("Name...").setTextFormat("[c_white]");
-    _add_group.add(_textbox);
-
-    var _btn_add = new UIButton("Btn_AddAbility", 220, 0, 80, 40, "Add", blue_button00);
-    _btn_add.setCallback(UI_EVENT.LEFT_RELEASE, function() {
-        var _name = ui_get("TextBox_AbilityName").getText();
-        show_debug_message("Add clicked. Text read: " + string(_name));
-        if (_name != "") {
-            array_push(obj_wheel.abilities, new Ability(_name, 1));
-            show_debug_message("Ability added: " + _name + " | Total: " + string(array_length(obj_wheel.abilities)));
-            obj_wheel.build_ability_panel();
-        } else {
-            show_debug_message("Add clicked but name was empty");
-        }
-    });
-    _add_group.add(_btn_add);
-
-    var _btn_remove = new UIButton("Btn_RemoveAbility", 300, 0, 100, 40, "Remove", blue_button00);
-    _btn_remove.setCallback(UI_EVENT.LEFT_RELEASE, function() {
-        var _name = ui_get("TextBox_AbilityName").getText();
-        show_debug_message("Remove clicked. Text read: " + string(_name));
-        var _found = false;
-        for (var i = array_length(obj_wheel.abilities) - 1; i >= 0; i--) {
-            if (obj_wheel.abilities[i].name == _name) {
-                array_delete(obj_wheel.abilities, i, 1);
-                show_debug_message("Ability removed: " + _name + "; Remaining: " + string(array_length(obj_wheel.abilities)));
-                _found = true;
-                break;
-            }
-        }
-        if (!_found) show_debug_message("Remove: no ability found with name: " + string(_name));
-        obj_wheel.build_ability_panel();
-    });
-    _add_group.add(_btn_remove);
-    _panel.add(_add_group);
-
-    // One group per ability -------------------------------------------------------------------
-    var _row_h = 50;
-    show_debug_message("Building rows for " + string(array_length(abilities)) + " abilities");
+	_panel.setResizable(true).setImageAlpha(0.75).setTitle("Ability Wheel - Press \"E\" to Spin").setTitleFormat("[c_black][fa_top]");
 	
-	var _end_y = 0;
-    for (var i = 0; i < array_length(abilities); i++) {
-        var _ability = abilities[i];
-        var _i = i;
-        var _y = 100 + i * _row_h;
-
-        show_debug_message("Row " + string(i) + ": " + _ability.name + " weight=" + string(_ability.weight));
-
-        var _group = new UIGroup(string($"Group_Ability_{i}"), 0, _y, 480, _row_h, undefined);
-
-        var _name_txt = new UIText(string($"Text_Name_{i}"), 0, 0, _ability.name);
-		_name_txt.setTextFormat("[c_black][fa_left]");
-        _group.add(_name_txt);
-
-        var _btn_dec = new UIButton(string($"Btn_Dec_{i}"), 150, 0, 40, 40, "-", blue_button00);
-        _btn_dec.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {
-            var _old = obj_wheel.abilities[_i].weight;
-            obj_wheel.abilities[_i].weight = max(1, obj_wheel.abilities[_i].weight - 1);
-            show_debug_message("Dec clicked [" + string(_i) + "]: " + string(_old) + " -> " + string(obj_wheel.abilities[_i].weight));
-            obj_wheel.build_ability_panel();
-        }));
-        _group.add(_btn_dec);
-
-        var _weight_txt = new UIText(string($"Text_Weight_{i}"), 200, 0, string(_ability.weight));
-		_weight_txt.setTextFormat("[c_black][fa_left]");
-        _group.add(_weight_txt);
-
-        var _btn_inc = new UIButton(string($"Btn_Inc_{i}"), 250, 0, 40, 40, "+", blue_button00);
-        _btn_inc.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {
-            obj_wheel.abilities[_i].weight += 1;
-            show_debug_message("Inc clicked [" + string(_i) + "]: new weight=" + string(obj_wheel.abilities[_i].weight));
-            obj_wheel.build_ability_panel();
-        }));
-        _group.add(_btn_inc);
-
-        _panel.add(_group);
-		_end_y = _y
-    }
+	// Check Mark Buttons
+	var _b = [10, 40, 100, 30];
+	var _i = 0;
+	// var _j is UNUSED PLACEHOLDER
+	for (var _j = 0; _i < array_length(abilities); _i++) {
+		var _button = _panel.add(new UICheckbox(abilities[_i].name, _b[0], _b[1]+40*_i, abilities[_i].name, grey_boxCheckmark, grey_box, abilities[_i].enabled, UI_RELATIVE_TO.TOP_LEFT));
+		_button
+			.setTextFormatFalse("[c_black][fa_left]")
+			.setTextFormatTrue("[c_black][fa_left]")
+			.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {
+		        var _checked = ui_get(obj_wheel.abilities[_i].name).getValue();
+		        show_debug_message("Checkbox " + string(_i) + " is: " + string(_checked));
+				obj_wheel.abilities[_i].enabled = _checked;
+				obj_wheel.choice_index = 0;
+		    }));
+	}
+	_i++;
 	
+	// THE WHEEL!!!
     var _wheel_group = new UIGroup("Group_Wheel", 0, 0, 200, 200, undefined, UI_RELATIVE_TO.BOTTOM_CENTER);
 	var _canvas = new UICanvas("Wheel_Canvas", 0, 0, size, size, wheel_surf, UI_RELATIVE_TO.BOTTOM_CENTER)
 	_wheel_group.add(_canvas);
 	_panel.add(_wheel_group);
 	
+	
+	_panel.setMinHeight(200 + _i*40).setMinWidth(250);
 }
 
+// DRAWS the wheel within the context of a surface
 wheel_panel = function() {
 	var _x = 100;
 	var _y = 100;
@@ -119,9 +64,11 @@ wheel_panel = function() {
 
 	// Draw filled slice for chosen ability
 	var _probs = get_ability_probabilities();
+	if (array_length(_probs) == 0) return; // GUARD CLAUSE: Don't draw if no enabled abilities
+	
 	var _cumulative = 0;
-	for (var i = 0; i < choice_index; i++) {
-	    _cumulative += _probs[i];
+	for (var _i = 0; _i < choice_index; _i++) {
+	    _cumulative += _probs[_i];
 	}
 	var _slice_start = _cumulative * 360;
 	var _slice_end = _slice_start + (_probs[choice_index] * 360);
@@ -138,8 +85,8 @@ wheel_panel = function() {
 	// Draw dividing lines
 	var _count = array_length(_probs);
 	var _angle = 0;
-	for (var i = 0; i < _count; i++) {
-	    var _slice = _probs[i] * 360;
+	for (var _i = 0; _i < _count; _i++) {
+	    var _slice = _probs[_i] * 360;
 	    var _rad = degtorad(_angle);
 	    draw_set_color(c_black);
 	    draw_line(_x, _y, _x + cos(_rad) * 100, _y - sin(_rad) * 100);
@@ -156,22 +103,35 @@ wheel_panel = function() {
 
 build_ability_panel();
 
-
+// Returns an array of the probabilities given current ability weights. 
 function get_ability_probabilities() {
-    var _abilities = self.abilities;
+    //var _abilities = self.abilities;
+    var _abilities = self.get_enabled_abilities();
     var _count = array_length(_abilities);
     var _result = [];
     
     // Sum
     var _total = 0;
-    for (var i = 0; i < _count; i++) {
-        _total += _abilities[i].weight;
+    for (var _i = 0; _i < _count; _i++) {
+        _total += _abilities[_i].weight;
     }
     
     // Probability array
-    for (var i = 0; i < _count; i++) {
-        array_push(_result, _abilities[i].weight / _total);
+    for (var _i = 0; _i < _count; _i++) {
+        array_push(_result, _abilities[_i].weight / _total);
     }
     
     return _result;
+}
+
+function get_enabled_abilities() {
+	var _abilities = [];
+	
+	for (var _i = 0; _i < array_length(abilities); _i++) {
+		if abilities[_i].enabled {
+			array_push(_abilities, abilities[_i]);
+		}
+	}
+	
+	return _abilities;
 }
