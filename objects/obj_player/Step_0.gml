@@ -11,6 +11,12 @@ if xs[force.move] > spd {
     if xs[force.move] > spd xs[force.move] = spd;
 }
 
+if(keyboard_check(shift_key)){
+	spd=rspd
+}else{
+	spd=wspd
+}
+
 // Jump Code
 if scr_solid(x,y-1) { // Check for ceiling
 	ys[force.move] = 0; 

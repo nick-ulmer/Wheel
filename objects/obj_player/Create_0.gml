@@ -14,6 +14,9 @@ x_move = 0; // horizontal movement input after calculation
 y_move = 0; // vertical movement input after calculation
 spd = 8; // max horizontal movement input
 
+wspd = 8;
+rspd = 16;
+
 // Jump
 //j_move = 0; // Jumping input
 jspd = 10; // The jumping velocity
