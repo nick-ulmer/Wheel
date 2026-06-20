@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"Ability",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Ability",
+  "parent":{
+    "name":"Wheel",
+    "path":"folders/Wheel.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
