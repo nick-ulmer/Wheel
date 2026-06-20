@@ -3,6 +3,13 @@
 current_probability = 0;
 choice_index = 0;
 
+//spin_timer_max = 3 * 60; // 3 seconds
+//spin_timer = spin_timer_max; 
+spin_speed_max = 30;
+spin_speed = 0;
+spin_friction = 0.25;
+
+
 // obj_wheel Create Event
 abilities = [
 	new Ability("High Gravity", 1),
@@ -42,6 +49,8 @@ build_ability_panel = function() {
 		        show_debug_message("Checkbox " + string(_i) + " is: " + string(_checked));
 				obj_wheel.abilities[_i].enabled = _checked;
 				obj_wheel.choice_index = 0;
+				obj_wheel.spin_speed = 0;
+				obj_wheel.current_probability = 0;
 		    }));
 	}
 	_i++;
@@ -61,26 +70,29 @@ wheel_panel = function() {
 	var _x = 100;
 	var _y = 100;
 	draw_circle(_x, _y, 100, true);
-
-	// Draw filled slice for chosen ability
+	
+	
 	var _probs = get_ability_probabilities();
 	if (array_length(_probs) == 0) return; // GUARD CLAUSE: Don't draw if no enabled abilities
-	
-	var _cumulative = 0;
-	for (var _i = 0; _i < choice_index; _i++) {
-	    _cumulative += _probs[_i];
-	}
-	var _slice_start = _cumulative * 360;
-	var _slice_end = _slice_start + (_probs[choice_index] * 360);
 
-	draw_set_color(c_orange);
-	draw_primitive_begin(pr_trianglefan);
-	draw_vertex(_x, _y);
-	for (var _a = _slice_start; _a <= _slice_end; _a++) {
-	    draw_vertex(_x + cos(degtorad(_a)) * 100, _y - sin(degtorad(_a)) * 100);
+	if spin_speed <= 0 {
+		// Draw filled slice for chosen ability
+		var _cumulative = 0;
+		for (var _i = 0; _i < choice_index; _i++) {
+		    _cumulative += _probs[_i];
+		}
+		var _slice_start = _cumulative * 360;
+		var _slice_end = _slice_start + (_probs[choice_index] * 360);
+
+		draw_set_color(c_orange);
+		draw_primitive_begin(pr_trianglefan);
+		draw_vertex(_x, _y);
+		for (var _a = _slice_start; _a <= _slice_end; _a++) {
+		    draw_vertex(_x + cos(degtorad(_a)) * 100, _y - sin(degtorad(_a)) * 100);
+		}
+		draw_primitive_end();
+		draw_set_color(c_yellow);
 	}
-	draw_primitive_end();
-	draw_set_color(c_yellow);
 
 	// Draw dividing lines
 	var _count = array_length(_probs);
@@ -88,7 +100,7 @@ wheel_panel = function() {
 	for (var _i = 0; _i < _count; _i++) {
 	    var _slice = _probs[_i] * 360;
 	    var _rad = degtorad(_angle);
-	    draw_set_color(c_black);
+	    draw_set_color(c_yellow);
 	    draw_line(_x, _y, _x + cos(_rad) * 100, _y - sin(_rad) * 100);
 	    draw_set_color(c_yellow);
 	    _angle += _slice;
