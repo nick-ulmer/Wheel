@@ -46,6 +46,7 @@
   "name":"Wheel",
   "resources":[
     {"id":{"name":"scribble_fallback_font","path":"fonts/scribble_fallback_font/scribble_fallback_font.yy",},},
+    {"id":{"name":"Box","path":"objects/Box/Box.yy",},},
     {"id":{"name":"camera","path":"objects/camera/camera.yy",},},
     {"id":{"name":"gm","path":"objects/gm/gm.yy",},},
     {"id":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},},
@@ -206,7 +207,6 @@
     {"id":{"name":"__shd_scribble_bake_outline_8dir","path":"shaders/__shd_scribble_bake_outline_8dir/__shd_scribble_bake_outline_8dir.yy",},},
     {"id":{"name":"__shd_scribble_bake_shadow","path":"shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy",},},
     {"id":{"name":"__shd_scribble","path":"shaders/__shd_scribble/__shd_scribble.yy",},},
-    {"id":{"name":"bg","path":"sprites/bg/bg.yy",},},
     {"id":{"name":"blue_boxCheckmark","path":"sprites/blue_boxCheckmark/blue_boxCheckmark.yy",},},
     {"id":{"name":"blue_boxCross","path":"sprites/blue_boxCross/blue_boxCross.yy",},},
     {"id":{"name":"blue_boxTick","path":"sprites/blue_boxTick/blue_boxTick.yy",},},
@@ -336,6 +336,7 @@
     {"id":{"name":"spr_level","path":"sprites/spr_level/spr_level.yy",},},
     {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},},
     {"id":{"name":"spr_solid_basic","path":"sprites/spr_solid_basic/spr_solid_basic.yy",},},
+    {"id":{"name":"Tile","path":"sprites/Tile/Tile.yy",},},
     {"id":{"name":"transparent","path":"sprites/transparent/transparent.yy",},},
     {"id":{"name":"yellow_boxCheckmark","path":"sprites/yellow_boxCheckmark/yellow_boxCheckmark.yy",},},
     {"id":{"name":"yellow_boxCross","path":"sprites/yellow_boxCross/yellow_boxCross.yy",},},
