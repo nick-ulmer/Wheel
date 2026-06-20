@@ -7,11 +7,18 @@ choice_index = 0;
 // obj_wheel Create Event
 abilities = [new Ability("Fireball", 1)]; // test ability
 
+wheel_surf = -1;
+size = 200;
+
 build_ability_panel = function() {
     if (ui_exists("Panel_Abilities")) {
         ui_get("Panel_Abilities").destroy();
         show_debug_message("Panel rebuilt");
     }
+	
+	if (!surface_exists(wheel_surf)) {
+	    wheel_surf = surface_create(200, 200);
+	}
 
     var _panel = new UIPanel("Panel_Abilities", 0, 0, 500, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_LEFT);
 
@@ -58,7 +65,8 @@ build_ability_panel = function() {
     // One group per ability -------------------------------------------------------------------
     var _row_h = 50;
     show_debug_message("Building rows for " + string(array_length(abilities)) + " abilities");
-
+	
+	var _end_y = 0;
     for (var i = 0; i < array_length(abilities); i++) {
         var _ability = abilities[i];
         var _i = i;
@@ -94,13 +102,56 @@ build_ability_panel = function() {
         _group.add(_btn_inc);
 
         _panel.add(_group);
+		_end_y = _y
     }
 	
-    var _add_group = new UIGroup("Group_Wheel", 0, 40, 480, 50, undefined);
+    var _wheel_group = new UIGroup("Group_Wheel", 0, 0, 200, 200, undefined, UI_RELATIVE_TO.BOTTOM_CENTER);
+	var _canvas = new UICanvas("Wheel_Canvas", 0, 0, size, size, wheel_surf, UI_RELATIVE_TO.BOTTOM_CENTER)
+	_wheel_group.add(_canvas);
+	_panel.add(_wheel_group);
+	
 }
 
 wheel_panel = function() {
-	
+	var _x = 100;
+	var _y = 100;
+	draw_circle(_x, _y, 100, true);
+
+	// Draw filled slice for chosen ability
+	var _probs = get_ability_probabilities();
+	var _cumulative = 0;
+	for (var i = 0; i < choice_index; i++) {
+	    _cumulative += _probs[i];
+	}
+	var _slice_start = _cumulative * 360;
+	var _slice_end = _slice_start + (_probs[choice_index] * 360);
+
+	draw_set_color(c_orange);
+	draw_primitive_begin(pr_trianglefan);
+	draw_vertex(_x, _y);
+	for (var _a = _slice_start; _a <= _slice_end; _a++) {
+	    draw_vertex(_x + cos(degtorad(_a)) * 100, _y - sin(degtorad(_a)) * 100);
+	}
+	draw_primitive_end();
+	draw_set_color(c_yellow);
+
+	// Draw dividing lines
+	var _count = array_length(_probs);
+	var _angle = 0;
+	for (var i = 0; i < _count; i++) {
+	    var _slice = _probs[i] * 360;
+	    var _rad = degtorad(_angle);
+	    draw_set_color(c_black);
+	    draw_line(_x, _y, _x + cos(_rad) * 100, _y - sin(_rad) * 100);
+	    draw_set_color(c_yellow);
+	    _angle += _slice;
+	}
+
+	// Draw needle
+	var _needle_angle = degtorad(current_probability * 360);
+	draw_set_color(c_red);
+	draw_line(_x, _y, _x + cos(_needle_angle) * 100, _y - sin(_needle_angle) * 100);
+	draw_set_color(c_yellow);
 }
 
 build_ability_panel();
