@@ -46,6 +46,7 @@
   "name":"Wheel",
   "resources":[
     {"id":{"name":"scribble_fallback_font","path":"fonts/scribble_fallback_font/scribble_fallback_font.yy",},},
+    {"id":{"name":"camera","path":"objects/camera/camera.yy",},},
     {"id":{"name":"gm","path":"objects/gm/gm.yy",},},
     {"id":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
@@ -302,6 +303,7 @@
     {"id":{"name":"grey_sliderVertical","path":"sprites/grey_sliderVertical/grey_sliderVertical.yy",},},
     {"id":{"name":"grey_tickGrey","path":"sprites/grey_tickGrey/grey_tickGrey.yy",},},
     {"id":{"name":"grey_tickWhite","path":"sprites/grey_tickWhite/grey_tickWhite.yy",},},
+    {"id":{"name":"level_sprite","path":"sprites/level_sprite/level_sprite.yy",},},
     {"id":{"name":"metalPanel","path":"sprites/metalPanel/metalPanel.yy",},},
     {"id":{"name":"red_boxCheckmark","path":"sprites/red_boxCheckmark/red_boxCheckmark.yy",},},
     {"id":{"name":"red_boxCross","path":"sprites/red_boxCross/red_boxCross.yy",},},
@@ -364,8 +366,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rm_wheel","path":"rooms/rm_wheel/rm_wheel.yy",},},
     {"roomId":{"name":"rm_lvl0","path":"rooms/rm_lvl0/rm_lvl0.yy",},},
+    {"roomId":{"name":"rm_wheel","path":"rooms/rm_wheel/rm_wheel.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
