@@ -1,13 +1,19 @@
-//if spin_timer <= 0 return; // GUARD CLAUSE; 
-//spin_timer --;
-if spin_speed <= 0 return; // GUARD CLAUSE; 
+
+
+if spin_speed <= 0 {
+	if (!ability_activated) {
+		var _abilities = get_enabled_abilities();
+		_abilities[choice_index].activated();
+		ability_activated = true;
+		show_debug_message("ability activated!: " + _abilities[choice_index].name);
+	}
+	return;	
+} // GUARD CLAUSE; 
+
+
 spin_speed -= spin_friction;
 
 current_probability += spin_speed/100;
-
-show_debug_message(current_probability);
-show_debug_message(choice_index);
-
 
 var _probs = get_ability_probabilities();
 if (array_length(_probs) == 0) return; // GUARD CLAUSE: Don't spin wheel if no enabled abilities! 

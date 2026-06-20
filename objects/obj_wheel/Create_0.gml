@@ -3,21 +3,46 @@
 current_probability = 0;
 choice_index = 0;
 
-//spin_timer_max = 3 * 60; // 3 seconds
-//spin_timer = spin_timer_max; 
-spin_speed_max = 30;
-spin_speed = 0;
-spin_friction = 0.25;
+var _spin_seconds = 3;
+spin_friction = 0.05;
 
+spin_speed_max = spin_friction * _spin_seconds * game_get_speed(gamespeed_fps);
+spin_speed = 0; // live variable
+ability_activated = true;
 
 // obj_wheel Create Event
-abilities = [
+/*abilities = [
 	new Ability("High Gravity", 1),
 	new Ability("Low Gravity", 1),
 	new Ability("Speed Boost", 1),
 	new Ability("Explode", 1),
 	new Ability("Slippery", 1)
-];
+];//*/
+abilities =  global.abilities;
+function reset_wheel() {
+	obj_wheel.choice_index = 0;
+	obj_wheel.spin_speed = 0;
+	obj_wheel.current_probability = 0;
+}
+
+function set_ability_enable(_index, _is_enabled) {
+	obj_wheel.abilities[_index].enabled = _is_enabled;	
+	obj_wheel.abilities[_index].weight = 1;	
+	ui_get(obj_wheel.abilities[_index].name)
+		.setTextTrue(obj_wheel.abilities[_index].name + " " + string(obj_wheel.abilities[_index].weight))
+	reset_wheel();
+}
+
+function set_ability_weight(_index, _amount, _add = true) {
+	var _val = _amount;
+	if _add { _val = obj_wheel.abilities[_index].weight + _amount; }
+	_val = clamp(_val, 1, infinity);
+	obj_wheel.abilities[_index].weight = _val;
+	reset_wheel();
+	
+	ui_get(abilities[_index].name)
+		.setTextTrue(abilities[_index].name + " " + string(abilities[_index].weight))
+}
 
 wheel_surf = -1;
 size = 200; // width/height of surface space
@@ -40,19 +65,23 @@ build_ability_panel = function() {
 	var _i = 0;
 	// var _j is UNUSED PLACEHOLDER
 	for (var _j = 0; _i < array_length(abilities); _i++) {
-		var _button = _panel.add(new UICheckbox(abilities[_i].name, _b[0], _b[1]+40*_i, abilities[_i].name, grey_boxCheckmark, grey_box, abilities[_i].enabled, UI_RELATIVE_TO.TOP_LEFT));
+		var _add =		_panel.add(new UIButton(abilities[_i].name+"_add", _b[0], _b[1]+40*_i, _b[1], _b[1], "+", blue_button00));
+		_add.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, 1)}));
+		var _subtract = _panel.add(new UIButton(abilities[_i].name+"_subtract", _b[0]+50, _b[1]+40*_i, _b[1], _b[1], "-", blue_button00));
+		_subtract.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, -1)}));
+		
+		var _button = _panel.add(new UICheckbox(abilities[_i].name, _b[0]+100, _b[1]+40*_i, "", grey_boxCheckmark, grey_box, abilities[_i].enabled, UI_RELATIVE_TO.TOP_LEFT));
 		_button
 			.setTextFormatFalse("[c_black][fa_left]")
 			.setTextFormatTrue("[c_black][fa_left]")
+			.setTextFalse(abilities[_i].name)
+			.setTextTrue(abilities[_i].name)
 			.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {
 		        var _checked = ui_get(obj_wheel.abilities[_i].name).getValue();
 		        show_debug_message("Checkbox " + string(_i) + " is: " + string(_checked));
-				obj_wheel.abilities[_i].enabled = _checked;
-				obj_wheel.choice_index = 0;
-				obj_wheel.spin_speed = 0;
-				obj_wheel.current_probability = 0;
+				obj_wheel.set_ability_enable(_i, _checked);
 		    }));
-	}
+		}
 	_i++;
 	
 	// THE WHEEL!!!

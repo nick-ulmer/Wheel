@@ -1,5 +1,8 @@
 /// @description Initialize & Functions
 
+// Alterable physics! 
+speed_multiplier = 1;
+//gravRate = 0.8 by default. 
 
 image_speed = 0;
 image_index = 0;
@@ -12,10 +15,7 @@ minStep = 1; // smallest size of ledge
 // Base Movement
 x_move = 0; // horizontal movement input after calculation
 y_move = 0; // vertical movement input after calculation
-spd = 8; // max horizontal movement input
-
-wspd = 8; // walk speed
-rspd = 16; // run speed
+spd = 8; // horizontal movement input
 
 // Jump
 jspd = 10; // The jumping velocity
@@ -32,8 +32,9 @@ spaceTimerMax = 0;
 space_key_pressed = false;
 
 // Gravity
-gravRateNormal = .8; // Above water rate of gravity
-gravRateSpace = .5;
+gravRateNormal = .8; // Normal gravity rate
+gravRateHigh = 1.2; // High gravity rate
+gravRateLow = .4; // Low gravity rate
 gravRate = gravRateNormal; // Rate of gravity input increase. CAN BE IN-GAME CHANGED
 gravMax = 30; // Maximum amount of falling speed
 gravMove = 0; // Gravity input

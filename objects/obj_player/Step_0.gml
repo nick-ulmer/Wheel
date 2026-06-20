@@ -2,19 +2,13 @@
 
 control_check();
 
-spd = h_move*8;
+spd = h_move*8 * speed_multiplier;
 if xs[force.move] > spd {
     xs[force.move] -= .1+((scr_solid(x,y+1))*.5)+(xs[force.move] > 0 && spd < 0)*.4;
     if xs[force.move] < spd xs[force.move] = spd;
 } else if xs[force.move] < spd {
     xs[force.move] += .1+((scr_solid(x,y+1))*.5)+(xs[force.move] < 0 && spd > 0)*.4;
     if xs[force.move] > spd xs[force.move] = spd;
-}
-
-if(keyboard_check(shift_key)){
-	spd=rspd
-} else {
-	spd=wspd
 }
 
 // Jump Code
