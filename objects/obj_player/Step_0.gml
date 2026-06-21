@@ -1,5 +1,12 @@
 /// @description Perform Checks & Do Physics
 
+//delta's bad code start
+if(hp==0){
+	//die
+	game_end();
+}
+//delta's bad code end
+
 control_check();
 
 spd = h_move*8 * speed_multiplier;

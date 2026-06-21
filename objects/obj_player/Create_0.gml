@@ -7,6 +7,10 @@ speed_multiplier = 1;
 //image_speed = 0;
 image_index = 0;
 
+//delta's bad code start
+hp=5;
+//delta's bad code end
+
 // Ledges on the ground
 ledge = 4;
 didLedge = false; // Was a ledge initiated on the previous script step? 
@@ -75,6 +79,12 @@ function grav(_gravRate, _gravMax = 60) {
 		ys[force.grav] = 0;
 	}
 }
+
+//delta's bad code start
+function damage(){
+	hp--;
+}
+//delta's bad code end
 
 function add_forces() {
 	xs[force.total] = 0; ys[force.total] = 0; 

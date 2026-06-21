@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_spike",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_spike",
+  "parent":{
+    "name":"Wheel",
+    "path":"Wheel.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
