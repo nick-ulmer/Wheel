@@ -4,7 +4,7 @@
 speed_multiplier = 1;
 //gravRate = 0.8 by default. 
 
-image_speed = 0;
+//image_speed = 0;
 image_index = 0;
 
 // Ledges on the ground
