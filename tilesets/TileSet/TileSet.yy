@@ -5,7 +5,7 @@
   "macroPageTiles":{
     "SerialiseHeight":7,
     "SerialiseWidth":5,
-    "TileCompressedData":[-22,0,1,1,-4,0,2,3,2,-3,0,3,5,4,0,],
+    "TileCompressedData":[-22,0,1,3,-4,0,1,3,-4,0,3,3,0,0,],
     "TileDataFormat":1,
   },
   "name":"TileSet",
