@@ -60,6 +60,7 @@
     {"id":{"name":"obj_tile_medium","path":"objects/obj_tile_medium/obj_tile_medium.yy",},},
     {"id":{"name":"obj_tile_small","path":"objects/obj_tile_small/obj_tile_small.yy",},},
     {"id":{"name":"obj_tile","path":"objects/obj_tile/obj_tile.yy",},},
+    {"id":{"name":"obj_token","path":"objects/obj_token/obj_token.yy",},},
     {"id":{"name":"obj_wall_large","path":"objects/obj_wall_large/obj_wall_large.yy",},},
     {"id":{"name":"obj_wall_small","path":"objects/obj_wall_small/obj_wall_small.yy",},},
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},},

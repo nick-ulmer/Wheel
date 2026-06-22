@@ -1,4 +1,11 @@
 /// @description Initialize
+tokens = 0;
+
+add_tokens = function(_value = 1) {
+	tokens += _value;
+	show_debug_message(string(_value) + " tokens added for a total of " + string(tokens));
+}
+
 game_paused = false;
 
 build_pause_menu = function() {
