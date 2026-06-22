@@ -1,7 +1,7 @@
 function Ability(_name, _weight, _activated = function() {}) constructor {
 	self.name =_name;
 	self.weight = _weight;
-	self.enabled = false;
+	self.enabled = true;
 	self.activated = _activated;
 }
 

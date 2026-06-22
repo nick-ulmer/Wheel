@@ -1,5 +1,9 @@
 /// @description 
 
+negentropy = 10;
+
+entropy = 0;
+
 current_probability = 0;
 choice_index = 0;
 

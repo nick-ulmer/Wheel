@@ -92,19 +92,18 @@ invincibility_frames_max = 60 * 1; // One second of invincibility
 flash_timer = 0
 knockback_timer_max = 40;
 knockback_timer = knockback_timer_max;
-function damage(_amount = 1){
-	if (invincibility_frames > 0) { return; } // Guard Clause - Can't damage if invincible
-	hp -= _amount;
-	invincibility_frames = invincibility_frames_max
-	
-	xs[force.damaged] = (5 - random(10)) * knockback_multiplier;
-	ys[force.damaged] = -10 * knockback_multiplier;
-	knockback_timer = knockback_timer_max;
-	
-	if (hp <= 0) {
-		//die
-		show_debug_message("player is dead");
-	}
+function damage(_amount = 1, _direction = 0){
+    if (invincibility_frames > 0) { return; }
+    hp -= _amount;
+    invincibility_frames = invincibility_frames_max;
+    
+    xs[force.damaged] = (lengthdir_x(10, _direction + 90) + lengthdir_x(random(10) - 5, _direction)) * knockback_multiplier;
+ys[force.damaged] = (lengthdir_y(10, _direction + 90) + lengthdir_y(random(10) - 5, _direction)) * knockback_multiplier;
+    knockback_timer = knockback_timer_max;
+    
+    if (hp <= 0) {
+        show_debug_message("player is dead");
+    }
 }
 
 function add_forces() {
@@ -130,7 +129,6 @@ function collision_check() {
 
 	// Horizontal Collisions
 	if (scr_solid(x+xspd,y)) {
-		//xs[force.damaged] = 0; ys[force.damaged] = 0;
 		// Change the speed according to the height of the ledge. 
 	    xspd = ledge*sign(xspd);
 		
@@ -158,7 +156,6 @@ function collision_check() {
 	
 	// Vertical Collisions: Floors or ceilings accounting for diagonal collisions
 	if scr_solid(x+xspd,y+yspd) {
-		//xs[force.damaged] = 0; ys[force.damaged] = 0;
 	    while !(scr_solid(x+xspd,y+sign(yspd))) {
 	        y+=sign(yspd);
 	    }

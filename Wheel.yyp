@@ -66,6 +66,7 @@
     {"id":{"name":"obj_wheel","path":"objects/obj_wheel/obj_wheel.yy",},},
     {"id":{"name":"UI","path":"objects/UI/UI.yy",},},
     {"id":{"name":"rm_lvl0","path":"rooms/rm_lvl0/rm_lvl0.yy",},},
+    {"id":{"name":"rm_lvlTEST","path":"rooms/rm_lvlTEST/rm_lvlTEST.yy",},},
     {"id":{"name":"rm_wheel","path":"rooms/rm_wheel/rm_wheel.yy",},},
     {"id":{"name":"__Configuration__","path":"scripts/__Configuration__/__Configuration__.yy",},},
     {"id":{"name":"__scribble_class_element","path":"scripts/__scribble_class_element/__scribble_class_element.yy",},},
@@ -390,6 +391,7 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
+    {"roomId":{"name":"rm_lvlTEST","path":"rooms/rm_lvlTEST/rm_lvlTEST.yy",},},
     {"roomId":{"name":"rm_lvl0","path":"rooms/rm_lvl0/rm_lvl0.yy",},},
     {"roomId":{"name":"rm_wheel","path":"rooms/rm_wheel/rm_wheel.yy",},},
   ],
