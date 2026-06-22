@@ -1,8 +1,7 @@
 /// @description 
 
-negentropy = 10;
-
-entropy = 0;
+min_entropy = 10;
+entropy = 0; // Initialized at bottom of create script
 
 current_probability = 0;
 choice_index = 0;
@@ -12,21 +11,32 @@ spin_friction = 0.05;
 
 spin_speed_max = spin_friction * _spin_seconds * game_get_speed(gamespeed_fps);
 spin_speed = 0; // live variable
-ability_activated = true;
+ability_activated = true; // Also live
 
-// obj_wheel Create Event
-/*abilities = [
-	new Ability("High Gravity", 1),
-	new Ability("Low Gravity", 1),
-	new Ability("Speed Boost", 1),
-	new Ability("Explode", 1),
-	new Ability("Slippery", 1)
-];//*/
 abilities =  global.abilities;
+
+function update_entropy(_update_text = true) {
+    var _probs = get_ability_probabilities();
+	if (array_length(_probs) == 0) { entropy = 0; return; }
+	
+    var _entropy = 0;
+    for (var i = 0; i < array_length(_probs); i++) {
+        if (_probs[i] > 0) {
+            _entropy += _probs[i] * log2(_probs[i]);
+        }
+    }
+	entropy = -_entropy
+	if _update_text {
+		ui_get("Entropy_Text")
+			.setText("Entropy: " + string(entropy))
+	}
+}
+
 function reset_wheel() {
 	obj_wheel.choice_index = 0;
 	obj_wheel.spin_speed = 0;
 	obj_wheel.current_probability = 0;
+	update_entropy();
 }
 
 function set_ability_enable(_index, _is_enabled) {
@@ -47,6 +57,40 @@ function set_ability_weight(_index, _amount, _add = true) {
 	ui_get(abilities[_index].name)
 		.setTextTrue(abilities[_index].name + " " + string(abilities[_index].weight))
 }
+
+// Returns an array of the probabilities given current ability weights. 
+function get_ability_probabilities() {
+    //var _abilities = self.abilities;
+    var _abilities = self.get_enabled_abilities();
+    var _count = array_length(_abilities);
+    var _result = [];
+    
+    // Sum
+    var _total = 0;
+    for (var _i = 0; _i < _count; _i++) {
+        _total += _abilities[_i].weight;
+    }
+    
+    // Probability array
+    for (var _i = 0; _i < _count; _i++) {
+        array_push(_result, _abilities[_i].weight / _total);
+    }
+    
+    return _result;
+}
+
+function get_enabled_abilities() {
+	var _abilities = [];
+	
+	for (var _i = 0; _i < array_length(abilities); _i++) {
+		if abilities[_i].enabled {
+			array_push(_abilities, abilities[_i]);
+		}
+	}
+	return _abilities;
+}
+
+
 
 wheel_surf = -1;
 size = 200; // width/height of surface space
@@ -89,10 +133,17 @@ build_ability_panel = function() {
 	_i++;
 	
 	// THE WHEEL!!!
-    var _wheel_group = new UIGroup("Group_Wheel", 0, 0, 200, 200, undefined, UI_RELATIVE_TO.BOTTOM_CENTER);
-	var _canvas = new UICanvas("Wheel_Canvas", 0, 0, size, size, wheel_surf, UI_RELATIVE_TO.BOTTOM_CENTER)
+    var _wheel_group = new UIGroup("Group_Wheel", 0, 0, 200, 200, undefined, UI_RELATIVE_TO.BOTTOM_LEFT);
+	var _canvas = new UICanvas("Wheel_Canvas", 0, 0, size, size, wheel_surf, UI_RELATIVE_TO.BOTTOM_LEFT)
 	_wheel_group.add(_canvas);
 	_panel.add(_wheel_group);
+	
+	// Entropy Text
+	var _entropy_text = new UIText("Entropy_Text", 0, 0, "Entropy: " + string(entropy), UI_RELATIVE_TO.BOTTOM_RIGHT);
+	_panel.add(_entropy_text).setTextFormat("[c_black][fa_right][fa_bottom]");
+	
+	var _min_entropy_text = new UIText("Min_Entropy_Text", 0, -20, "Minimum Entropy: " + string(min_entropy), UI_RELATIVE_TO.BOTTOM_RIGHT);
+	_panel.add(_min_entropy_text).setTextFormat("[c_black][fa_right][fa_bottom]");
 	
 	
 	_panel.setMinHeight(200 + _i*40).setMinWidth(250);
@@ -145,38 +196,7 @@ wheel_panel = function() {
 	draw_line(_x, _y, _x + cos(_needle_angle) * 100, _y - sin(_needle_angle) * 100);
 	draw_set_color(c_yellow);
 }
-
+// Initialize Entropy
+update_entropy(false);
 build_ability_panel();
 
-// Returns an array of the probabilities given current ability weights. 
-function get_ability_probabilities() {
-    //var _abilities = self.abilities;
-    var _abilities = self.get_enabled_abilities();
-    var _count = array_length(_abilities);
-    var _result = [];
-    
-    // Sum
-    var _total = 0;
-    for (var _i = 0; _i < _count; _i++) {
-        _total += _abilities[_i].weight;
-    }
-    
-    // Probability array
-    for (var _i = 0; _i < _count; _i++) {
-        array_push(_result, _abilities[_i].weight / _total);
-    }
-    
-    return _result;
-}
-
-function get_enabled_abilities() {
-	var _abilities = [];
-	
-	for (var _i = 0; _i < array_length(abilities); _i++) {
-		if abilities[_i].enabled {
-			array_push(_abilities, abilities[_i]);
-		}
-	}
-	
-	return _abilities;
-}
