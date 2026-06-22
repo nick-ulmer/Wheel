@@ -218,6 +218,7 @@
     {"id":{"name":"__shd_scribble_bake_outline_8dir","path":"shaders/__shd_scribble_bake_outline_8dir/__shd_scribble_bake_outline_8dir.yy",},},
     {"id":{"name":"__shd_scribble_bake_shadow","path":"shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy",},},
     {"id":{"name":"__shd_scribble","path":"shaders/__shd_scribble/__shd_scribble.yy",},},
+    {"id":{"name":"shop_theme","path":"sounds/shop_theme/shop_theme.yy",},},
     {"id":{"name":"bg","path":"sprites/bg/bg.yy",},},
     {"id":{"name":"blue_boxCheckmark","path":"sprites/blue_boxCheckmark/blue_boxCheckmark.yy",},},
     {"id":{"name":"blue_boxCross","path":"sprites/blue_boxCross/blue_boxCross.yy",},},
