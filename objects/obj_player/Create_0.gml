@@ -57,6 +57,12 @@ function control_check() {
 	
 	h_move = (d_key+(-a_key))*(1-.5*shift_key);
 	v_move = (w_key+(-s_key));
+	
+	if (d_key) {
+		image_xscale = abs(image_xscale);
+	} else if (a_key) {
+		image_xscale = -1 * abs(image_xscale);
+	}
 }
 control_check();
 
