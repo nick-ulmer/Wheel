@@ -1,11 +1,10 @@
 /// @description Perform Checks & Do Physics
+if (hp <= 0) { return; } // Guard Clause; 
+// Probably replace guard clause with instance destroy then return
+// And create a new dead player object probably 
 
-//delta's bad code start
-if(hp==0){
-	//die
-	game_end();
-}
-//delta's bad code end
+// Remove invincibility frame if above 0
+if (invincibility_frames > 0) { invincibility_frames --; flash_timer ++; }
 
 control_check();
 

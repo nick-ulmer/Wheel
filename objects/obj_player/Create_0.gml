@@ -4,12 +4,11 @@
 speed_multiplier = 1;
 //gravRate = 0.8 by default. 
 
-//image_speed = 0;
 image_index = 0;
 
-//delta's bad code start
-hp=5;
-//delta's bad code end
+// Health and Damage
+hp_max = 5;
+hp = hp_max;
 
 // Ledges on the ground
 ledge = 4;
@@ -71,6 +70,7 @@ enum force {
 	move, // Voluntary movement from entity
 	jump, // 
 	grav, // Gravitational force to entity
+	damaged, // from being damaged
 total,num}
 var _i = 0;
 repeat(force.num) {xs[_i] = 0; ys[_i] = 0; _i++}
@@ -86,11 +86,22 @@ function grav(_gravRate, _gravMax = 60) {
 	}
 }
 
-//delta's bad code start
-function damage(){
-	hp--;
+invincibility_frames = 0;
+invincibility_frames_max = 60 * 1; // One second of invincibility
+flash_timer = 0
+function damage(_amount = 1){
+	if (invincibility_frames > 0) { return; } // Guard Clause - Can't damage if invincible
+	hp -= _amount;
+	invincibility_frames = invincibility_frames_max
+	
+	xs[force.damaged] = 5 - random(10)
+	ys[force.damaged] = -10;
+	
+	if (hp <= 0) {
+		//die
+		game_end();
+	}
 }
-//delta's bad code end
 
 function add_forces() {
 	xs[force.total] = 0; ys[force.total] = 0; 
@@ -109,6 +120,10 @@ function collision_check() {
 	var k = 0; // Ledge go down
 
 	add_forces();
+	/*if (ys[force.damaged] != 0) { 
+		ys[force.damaged] -= sign(ys[force.damaged]); 
+		
+	}*/
 	
 	// If a ledge was just encountered: move up a step without changing physics
 	if (didLedge && abs(xspd) > ledge) {didLedge=false;}
@@ -128,7 +143,7 @@ function collision_check() {
 	    if (scr_solid(x+xspd,y-i) && i!=ledge+minStep) { 
 	        if (!scr_solid(x,y+1)) {/*x_move = 0;*/xspd = sign(xspd);} // If NOT on ground, reset speed.
 	        y += i;
-	        if scr_solid(x,y+1) yspd=0; // If on ground, no more vertical movement
+	        if scr_solid(x,y+1) { yspd=0; } // If on ground, no more vertical movement
 	        didLedge = true;
 	    } else if (scr_solid(x+xspd,y+i) && i!=ledge+minStep) { // DOWNWARDS
 	        if (!scr_solid(x,y+1)) {xspd = sign(xspd);}
@@ -142,6 +157,7 @@ function collision_check() {
 	
 	// Vertical Collisions: Floors or ceilings accounting for diagonal collisions
 	if scr_solid(x+xspd,y+yspd) {
+		xs[force.damaged] = 0; ys[force.damaged] = 0;
 	    while !(scr_solid(x+xspd,y+sign(yspd))) {
 	        y+=sign(yspd);
 	    }
