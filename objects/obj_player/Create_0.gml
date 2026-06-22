@@ -3,6 +3,7 @@
 // Alterable physics! 
 speed_multiplier = 1;
 //gravRate = 0.8 by default. 
+knockback_multiplier = 1;
 
 image_index = 0;
 
@@ -89,17 +90,20 @@ function grav(_gravRate, _gravMax = 60) {
 invincibility_frames = 0;
 invincibility_frames_max = 60 * 1; // One second of invincibility
 flash_timer = 0
+knockback_timer_max = 40;
+knockback_timer = knockback_timer_max;
 function damage(_amount = 1){
 	if (invincibility_frames > 0) { return; } // Guard Clause - Can't damage if invincible
 	hp -= _amount;
 	invincibility_frames = invincibility_frames_max
 	
-	xs[force.damaged] = 5 - random(10)
-	ys[force.damaged] = -10;
+	xs[force.damaged] = (5 - random(10)) * knockback_multiplier;
+	ys[force.damaged] = -10 * knockback_multiplier;
+	knockback_timer = knockback_timer_max;
 	
 	if (hp <= 0) {
 		//die
-		game_end();
+		show_debug_message("player is dead");
 	}
 }
 
@@ -120,16 +124,13 @@ function collision_check() {
 	var k = 0; // Ledge go down
 
 	add_forces();
-	/*if (ys[force.damaged] != 0) { 
-		ys[force.damaged] -= sign(ys[force.damaged]); 
-		
-	}*/
 	
 	// If a ledge was just encountered: move up a step without changing physics
 	if (didLedge && abs(xspd) > ledge) {didLedge=false;}
 
 	// Horizontal Collisions
 	if (scr_solid(x+xspd,y)) {
+		//xs[force.damaged] = 0; ys[force.damaged] = 0;
 		// Change the speed according to the height of the ledge. 
 	    xspd = ledge*sign(xspd);
 		
@@ -141,7 +142,7 @@ function collision_check() {
 		
 		// If there's a collision UPWARDS and is NOT maxed out.
 	    if (scr_solid(x+xspd,y-i) && i!=ledge+minStep) { 
-	        if (!scr_solid(x,y+1)) {/*x_move = 0;*/xspd = sign(xspd);} // If NOT on ground, reset speed.
+	        if (!scr_solid(x,y+1)) {xspd = sign(xspd);} // If NOT on ground, reset speed.
 	        y += i;
 	        if scr_solid(x,y+1) { yspd=0; } // If on ground, no more vertical movement
 	        didLedge = true;
@@ -157,7 +158,7 @@ function collision_check() {
 	
 	// Vertical Collisions: Floors or ceilings accounting for diagonal collisions
 	if scr_solid(x+xspd,y+yspd) {
-		xs[force.damaged] = 0; ys[force.damaged] = 0;
+		//xs[force.damaged] = 0; ys[force.damaged] = 0;
 	    while !(scr_solid(x+xspd,y+sign(yspd))) {
 	        y+=sign(yspd);
 	    }

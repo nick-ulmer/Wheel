@@ -6,6 +6,15 @@ if (hp <= 0) { return; } // Guard Clause;
 // Remove invincibility frame if above 0
 if (invincibility_frames > 0) { invincibility_frames --; flash_timer ++; }
 
+if (knockback_timer > 0) {
+	knockback_timer --;
+} else {
+	xs[force.damaged] -= sign(xs[force.damaged]) * 0.5;
+	ys[force.damaged] -= sign(ys[force.damaged]) * 0.5;
+	if (abs(xs[force.damaged]) <= 1) xs[force.damaged] = 0;
+	if (abs(ys[force.damaged]) <= 1) ys[force.damaged] = 0;
+}
+
 control_check();
 
 spd = h_move*8 * speed_multiplier;
