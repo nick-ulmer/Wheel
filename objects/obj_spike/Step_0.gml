@@ -1,3 +1,3 @@
 if place_meeting(x, y, obj_player) {
-	obj_player.damage()
+	obj_player.damage(1, direction)
 }
