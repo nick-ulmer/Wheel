@@ -4,6 +4,5 @@ timer = max_timer;
 spinning = false;
 growing = false;
 
-prev_image_xscale = image_xscale;
-
-growth_rate = 0.05;
+original_image_xscale = image_xscale;
+growth_rate = original_image_xscale / 15;

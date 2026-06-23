@@ -30,7 +30,7 @@ if (spinning) {
 	
 	if (image_xscale <= 0) {
 		growing = true;
-	} else if image_xscale >= 1 {
+	} else if image_xscale >= original_image_xscale {
 		growing = false;
 		spinning = false;
 	}
