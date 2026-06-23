@@ -1,3 +1,4 @@
+// @description Check player collision and do spinning
 if place_meeting(x, y, obj_player) {
 	value = 0;
 	switch (image_index) {
@@ -9,4 +10,28 @@ if place_meeting(x, y, obj_player) {
 	}
 	gm.add_tokens(value);
 	instance_destroy(self);
+	return
+}
+
+timer --
+if (timer <= 0) {
+	spinning = !spinning;
+	timer = max_timer;
+}
+
+
+if (spinning) {
+	timer = max_timer;
+	if (growing) {
+		image_xscale += growth_rate;
+	} else {
+		image_xscale -= growth_rate;
+	}
+	
+	if (image_xscale <= 0) {
+		growing = true;
+	} else if image_xscale >= 1 {
+		growing = false;
+		spinning = false;
+	}
 }
