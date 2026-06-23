@@ -397,8 +397,8 @@
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
     {"roomId":{"name":"rm_main_menu","path":"rooms/rm_main_menu/rm_main_menu.yy",},},
-    {"roomId":{"name":"rm_lvlTEST","path":"rooms/rm_lvlTEST/rm_lvlTEST.yy",},},
     {"roomId":{"name":"rm_lvl0","path":"rooms/rm_lvl0/rm_lvl0.yy",},},
+    {"roomId":{"name":"rm_lvlTEST","path":"rooms/rm_lvlTEST/rm_lvlTEST.yy",},},
     {"roomId":{"name":"rm_wheel","path":"rooms/rm_wheel/rm_wheel.yy",},},
   ],
   "templateType":"game",
