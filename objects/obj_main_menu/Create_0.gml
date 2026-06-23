@@ -20,7 +20,7 @@ level_select = function() {
 	_lvl0
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("LevelSelect_Panel").destroy();
-			room_goto(rm_lvl0);
+			room_goto(rm_lvl_5);
 		});
 	_panel.add(_lvl0);
 	
