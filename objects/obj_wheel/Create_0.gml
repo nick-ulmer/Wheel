@@ -2,6 +2,7 @@
 
 min_entropy = 10;
 entropy = 0; // Initialized at bottom of create script
+spins_left = 10;
 
 current_probability = 0;
 choice_index = 0;

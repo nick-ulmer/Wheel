@@ -4,6 +4,7 @@
 speed_multiplier = 1;
 //gravRate = 0.8 by default. 
 knockback_multiplier = 1;
+friction_multiplier = 0.1;
 
 image_index = 0;
 

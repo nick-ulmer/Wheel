@@ -3,6 +3,7 @@ function Ability(_name, _weight, _activated = function() {}) constructor {
 	self.weight = _weight;
 	self.enabled = true;
 	self.activated = _activated;
+	self.bought = false;
 }
 
 global.abilities = [
@@ -24,6 +25,16 @@ global.abilities = [
 			speed_multiplier = 2;
 		}}
 	}),
-	new Ability("Explode", 1),
-	new Ability("Slippery", 1)
+	new Ability("Explode", 1, function() {
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;}
+		if (instance_exists(obj_player)) { with (obj_player) {
+			damage(1, 0);
+		}}
+	}),
+	new Ability("Slippery", 1, function() {
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;}
+		if (instance_exists(obj_player)) { with (obj_player) {
+			friction_multiplier = 0.1;
+		}}
+	})
 ]

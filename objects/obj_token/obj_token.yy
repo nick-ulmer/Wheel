@@ -39,8 +39,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"tokens_sprite",
-    "path":"sprites/tokens_sprite/tokens_sprite.yy",
+    "name":"spr_tokens",
+    "path":"sprites/spr_tokens/spr_tokens.yy",
   },
   "spriteMaskId":null,
   "visible":true,
