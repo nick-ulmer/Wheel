@@ -10,6 +10,14 @@ main_menu = function() {
 			level_select();
 		});
 	_panel.add(_play_button);
+	
+	var _shop_button = new UIButton("_shop_button", 0, 100, 100, 50, "Shop", blue_button00, UI_RELATIVE_TO.TOP_CENTER);
+	_shop_button
+		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
+			ui_get("MainMenu_Panel").destroy();
+			room_goto(rm_shop);
+		});
+	_panel.add(_shop_button);
 }
 
 level_select = function() {
