@@ -14,7 +14,7 @@ spin_speed_max = spin_friction * _spin_seconds * game_get_speed(gamespeed_fps);
 spin_speed = 0; // live variable
 ability_activated = true; // Also live
 
-abilities =  global.abilities;
+//abilities =  global.abilities;
 
 function update_entropy(_update_text = true) {
     var _probs = get_ability_probabilities();
@@ -41,22 +41,26 @@ function reset_wheel() {
 }
 
 function set_ability_enable(_index, _is_enabled) {
-	obj_wheel.abilities[_index].enabled = _is_enabled;	
-	obj_wheel.abilities[_index].weight = 1;	
-	ui_get(obj_wheel.abilities[_index].name)
-		.setTextTrue(obj_wheel.abilities[_index].name + " " + string(obj_wheel.abilities[_index].weight))
+	global.abilities[_index].enabled = _is_enabled;	
+	global.abilities[_index].weight = 1;	
+	ui_get(global.abilities[_index].name)
+		.setTextTrue(global.abilities[_index].name + " " + string(global.abilities[_index].weight))
 	reset_wheel();
 }
 
 function set_ability_weight(_index, _amount, _add = true) {
 	var _val = _amount;
-	if _add { _val = obj_wheel.abilities[_index].weight + _amount; }
+	if _add { _val = global.abilities[_index].weight + _amount; }
 	_val = clamp(_val, 1, infinity);
-	obj_wheel.abilities[_index].weight = _val;
+	global.abilities[_index].weight = _val;
 	reset_wheel();
 	
-	ui_get(abilities[_index].name)
-		.setTextTrue(abilities[_index].name + " " + string(abilities[_index].weight))
+	ui_get(global.abilities[_index].name)
+		.setTextTrue(global.abilities[_index].name + " " + string(global.abilities[_index].weight))
+}
+
+function buy_ability(_index) {
+	global.abilities[_index].bought = true;
 }
 
 // Returns an array of the probabilities given current ability weights. 
@@ -83,9 +87,9 @@ function get_ability_probabilities() {
 function get_enabled_abilities() {
 	var _abilities = [];
 	
-	for (var _i = 0; _i < array_length(abilities); _i++) {
-		if abilities[_i].enabled {
-			array_push(_abilities, abilities[_i]);
+	for (var _i = 0; _i < array_length(global.abilities); _i++) {
+		if global.abilities[_i].enabled {
+			array_push(_abilities, global.abilities[_i]);
 		}
 	}
 	return _abilities;
@@ -113,20 +117,20 @@ build_ability_panel = function() {
 	var _b = [10, 40, 100, 30];
 	var _i = 0;
 	// var _j is UNUSED PLACEHOLDER
-	for (var _j = 0; _i < array_length(abilities); _i++) {
-		var _add =		_panel.add(new UIButton(abilities[_i].name+"_add", _b[0], _b[1]+40*_i, _b[1], _b[1], "+", blue_button00));
+	for (var _j = 0; _i < array_length(global.abilities); _i++) {
+		var _add =		_panel.add(new UIButton(global.abilities[_i].name+"_add", _b[0], _b[1]+40*_i, _b[1], _b[1], "+", blue_button00));
 		_add.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, 1)}));
-		var _subtract = _panel.add(new UIButton(abilities[_i].name+"_subtract", _b[0]+50, _b[1]+40*_i, _b[1], _b[1], "-", blue_button00));
+		var _subtract = _panel.add(new UIButton(global.abilities[_i].name+"_subtract", _b[0]+50, _b[1]+40*_i, _b[1], _b[1], "-", blue_button00));
 		_subtract.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, -1)}));
 		
-		var _button = _panel.add(new UICheckbox(abilities[_i].name, _b[0]+100, _b[1]+40*_i, "", grey_boxCheckmark, grey_box, abilities[_i].enabled, UI_RELATIVE_TO.TOP_LEFT));
+		var _button = _panel.add(new UICheckbox(global.abilities[_i].name, _b[0]+100, _b[1]+40*_i, "", grey_boxCheckmark, grey_box, global.abilities[_i].enabled, UI_RELATIVE_TO.TOP_LEFT));
 		_button
 			.setTextFormatFalse("[c_black][fa_left]")
 			.setTextFormatTrue("[c_black][fa_left]")
-			.setTextFalse(abilities[_i].name)
-			.setTextTrue(abilities[_i].name)
+			.setTextFalse(global.abilities[_i].name)
+			.setTextTrue(global.abilities[_i].name)
 			.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {
-		        var _checked = ui_get(obj_wheel.abilities[_i].name).getValue();
+		        var _checked = ui_get(global.abilities[_i].name).getValue();
 		        show_debug_message("Checkbox " + string(_i) + " is: " + string(_checked));
 				obj_wheel.set_ability_enable(_i, _checked);
 		    }));
@@ -146,6 +150,11 @@ build_ability_panel = function() {
 	var _min_entropy_text = new UIText("Min_Entropy_Text", 0, -20, "Minimum Entropy: " + string(min_entropy), UI_RELATIVE_TO.BOTTOM_RIGHT);
 	_panel.add(_min_entropy_text).setTextFormat("[c_black][fa_right][fa_bottom]");
 	
+	var _save = _panel.add(new UIButton("Save_Button", 0, 0, 30, 30, "S", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER));
+		_save.setCallback(UI_EVENT.LEFT_RELEASE, method({}, function() {save_abilities();}));
+	
+	var _load = _panel.add(new UIButton("Load_Button", 0, -30, 30, 30, "L", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER));
+		_load.setCallback(UI_EVENT.LEFT_RELEASE, method({}, function() {load_abilities(); obj_wheel.reset_wheel(); obj_wheel.build_ability_panel();}));
 	
 	_panel.setMinHeight(200 + _i*40).setMinWidth(250);
 }

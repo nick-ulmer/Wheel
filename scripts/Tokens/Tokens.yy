@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"Tokens",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Tokens",
+  "parent":{
+    "name":"Wheel",
+    "path":"folders/Wheel.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
