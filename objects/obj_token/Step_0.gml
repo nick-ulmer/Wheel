@@ -8,7 +8,7 @@ if place_meeting(x, y, obj_player) {
 		case 3: value = 50; break; 
 		default: value = 1; break; 
 	}
-	add_tokens(value);
+	global.add_tokens(value);
 	instance_destroy(self);
 	return
 }

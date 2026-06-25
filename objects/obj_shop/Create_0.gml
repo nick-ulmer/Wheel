@@ -9,13 +9,13 @@ main = function() {
 	var _panel = new UIPanel("Shop_Panel", 0, 0, 1000, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_CENTER);
 	_panel.setResizable(true).setImageAlpha(0.75).setTitle("The Shop").setTitleFormat("[c_black][fa_top]");
 
-	/*var _play_button = new UIButton("Play_Button", 0, 50, 100, 50, "Play", blue_button00, UI_RELATIVE_TO.TOP_CENTER);
-	_play_button
+	var _main_menu_button = new UIButton("_main_menu_button", 0, -50, 100, 50, "Main Menu", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER);
+	_main_menu_button
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
-			//ui_get("MainMenu_Panel").destroy();
-			//level_select();
+			ui_get("Shop_Panel").destroy();
+			room_goto(rm_main_menu);
 		});
-	_panel.add(_play_button);*/
+	_panel.add(_main_menu_button);
 	
 	// RESET
 	a_bought = [];
@@ -39,6 +39,7 @@ main = function() {
 		var _a = _panel.add(new UIButton("shop_"+string(_i), -100, _i*30+50, 200, 25, _text, blue_button00, UI_RELATIVE_TO.TOP_CENTER))
 		_a.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {
 			obj_shop.ability_buy_info(obj_shop.a_shop[_i]);
+			instance_destroy(obj_wheel);
 			ui_get("Shop_Panel").destroy();
 		}))
 	}
@@ -47,6 +48,9 @@ main = function() {
 		_a.setTextFormat("[fa_top]").setTextFormatMouseover("[fa_top]").setTextFormatClick("[fa_top]");
 		//var _a = _panel.add(new UIButton("bought_"+string(_i), 100, _i*30+30, 200, 25, global.abilities[a_bought[_i]].name, blue_button00, UI_RELATIVE_TO.TOP_CENTER))
 	}
+	
+	var _money = _panel.add(new UIText("Money_Counter", 0, -30, "Tokens: " + string(global.tokens),UI_RELATIVE_TO.BOTTOM_CENTER))
+	_money.setTextFormat("[fa_center][fa_middle]");
 	
 	#region Sprites
 	var _s = 64;
@@ -71,16 +75,26 @@ ability_buy_info = function(_ability_index) {
 	var _back = _panel.add(new UIButton("go_back", 0, -50, 100, 50, "Go Back", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER));
 	_back.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 		obj_shop.main();
+		instance_create_layer(0, 0, "Instances", obj_wheel);
 		ui_get("Buy_Panel").destroy();
 	})
+	
 	
 	var _buy = _panel.add(new UIButton("ability_buy", 0, -110, 100, 50, "Buy It!!!", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER));
 	_buy.setCallback(UI_EVENT.LEFT_RELEASE, method({_ability_index}, function() {
 		obj_wheel.buy_ability(_ability_index);
 		save_abilities();
 		obj_shop.main();
+		instance_create_layer(0, 0, "Instances", obj_wheel);
 		ui_get("Buy_Panel").destroy();
-	}))
+	})).setSpriteDisabled(blue_button13);
+	if (global.tokens < global.abilities[_ability_index].cost) {
+		_buy.setEnabled(false);//.setSprite(blue_button13);
+	}
+	
+	
+	var _money = _panel.add(new UIText("Money_Counter", 0, -30, "Tokens: " + string(global.tokens),UI_RELATIVE_TO.BOTTOM_CENTER))
+	_money.setTextFormat("[fa_center][fa_middle]");
 	
 }
 

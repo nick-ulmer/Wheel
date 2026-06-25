@@ -88,7 +88,7 @@ function get_enabled_abilities() {
 	var _abilities = [];
 	
 	for (var _i = 0; _i < array_length(global.abilities); _i++) {
-		if global.abilities[_i].enabled {
+		if global.abilities[_i].enabled && global.abilities[_i].bought {
 			array_push(_abilities, global.abilities[_i]);
 		}
 	}
@@ -110,14 +110,14 @@ build_ability_panel = function() {
 	    wheel_surf = surface_create(200, 200);
 	}
 
-    var _panel = new UIPanel("Panel_Abilities", 0, 0, 500, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_LEFT);
+    var _panel = new UIPanel("Panel_Abilities", 0, 0, 300, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_LEFT);
 	_panel.setResizable(true).setImageAlpha(0.75).setTitle("Ability Wheel - Press \"E\" to Spin").setTitleFormat("[c_black][fa_top]");
 	
 	// Check Mark Buttons
 	var _b = [10, 40, 100, 30];
-	var _i = 0;
-	// var _j is UNUSED PLACEHOLDER
-	for (var _j = 0; _i < array_length(global.abilities); _i++) {
+	var _i = 0; // Used to placehold the vertical position on the panel.
+	for (var _j = 0; _j < array_length(global.abilities); _j++) {
+		if (!global.abilities[_i].bought) { continue; }
 		var _add =		_panel.add(new UIButton(global.abilities[_i].name+"_add", _b[0], _b[1]+40*_i, _b[1], _b[1], "+", blue_button00));
 		_add.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, 1)}));
 		var _subtract = _panel.add(new UIButton(global.abilities[_i].name+"_subtract", _b[0]+50, _b[1]+40*_i, _b[1], _b[1], "-", blue_button00));
@@ -128,13 +128,14 @@ build_ability_panel = function() {
 			.setTextFormatFalse("[c_black][fa_left]")
 			.setTextFormatTrue("[c_black][fa_left]")
 			.setTextFalse(global.abilities[_i].name)
-			.setTextTrue(global.abilities[_i].name)
+			.setTextTrue(global.abilities[_i].name + " " + string(global.abilities[_i].weight))
 			.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {
 		        var _checked = ui_get(global.abilities[_i].name).getValue();
 		        show_debug_message("Checkbox " + string(_i) + " is: " + string(_checked));
 				obj_wheel.set_ability_enable(_i, _checked);
-		    }));
-		}
+			}));
+		_i++;
+	}
 	_i++;
 	
 	// THE WHEEL!!!
@@ -156,7 +157,7 @@ build_ability_panel = function() {
 	var _load = _panel.add(new UIButton("Load_Button", 0, -30, 30, 30, "L", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER));
 		_load.setCallback(UI_EVENT.LEFT_RELEASE, method({}, function() {load_abilities(); obj_wheel.reset_wheel(); obj_wheel.build_ability_panel();}));
 	
-	_panel.setMinHeight(200 + _i*40).setMinWidth(250);
+	_panel.setMinHeight(200 + _i*40).setMinWidth(300);
 }
 
 // DRAWS the wheel within the context of a surface
