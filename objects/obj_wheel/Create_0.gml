@@ -64,6 +64,8 @@ function set_ability_weight(_index, _amount, _add = true) {
 
 function buy_ability(_index) {
 	global.abilities[_index].bought = true;
+	var _cost = global.abilities[_index].cost;
+	add_tokens(-_cost);
 }
 
 // Returns an array of the probabilities given current ability weights. 

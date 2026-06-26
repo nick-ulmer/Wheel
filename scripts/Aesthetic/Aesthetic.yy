@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"Aesthetic",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Aesthetic",
+  "parent":{
+    "name":"Wheel",
+    "path":"Wheel.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
