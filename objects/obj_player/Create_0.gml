@@ -105,6 +105,7 @@ ys[force.damaged] = (lengthdir_y(10, _direction + 90) + lengthdir_y(random(10) -
     
     if (hp <= 0) {
         show_debug_message("player is dead");
+		gm.game_over();
     }
 }
 
