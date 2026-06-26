@@ -1,20 +1,8 @@
 /// @description Initialize
 
-/*var _minutes = 0; // Minutes
-switch(room) {
-	case rm_lvl_0: _minutes = 3; break;
-	case rm_lvl_1: _minutes = 1; break;
-	case rm_lvl_2: _minutes = 2; break;
-	case rm_lvl_3: _minutes = 3; break;
-	//case rm_lvl_4: _minutes = 3; break;
-	case rm_lvl_5: _minutes = 5; break;
-}*/
-
 var _minutes = getLevelByRoom(room).max_timer_mins;
 game_timer = game_get_speed(gamespeed_fps) * 60 * _minutes; // active timer that gets ticked down
 level_time = game_timer; // records the time in the level. 
-
-
 
 game_paused = false;
 
