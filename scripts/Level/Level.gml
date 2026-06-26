@@ -67,3 +67,8 @@ function getLevelByName(_name) {
     }
     return undefined;
 }
+
+function setLevelCompleted(_room) {
+	getLevelByRoom(_room).completed = true;
+	save_levels();
+}

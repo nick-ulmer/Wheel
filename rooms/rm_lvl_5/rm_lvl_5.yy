@@ -168,6 +168,7 @@
     {"name":"inst_5E7FE4AD","path":"rooms/rm_lvl_5/rm_lvl_5.yy",},
     {"name":"inst_36B24512","path":"rooms/rm_lvl_5/rm_lvl_5.yy",},
     {"name":"inst_382EF543","path":"rooms/rm_lvl_5/rm_lvl_5.yy",},
+    {"name":"inst_5AF1D56F","path":"rooms/rm_lvl_5/rm_lvl_5.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -247,6 +248,7 @@
         {"$GMRInstance":"v4","%Name":"inst_38ECDE40","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_38ECDE40","objectId":{"name":"obj_token","path":"objects/obj_token/obj_token.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":6576.0,"y":2400.0,},
         {"$GMRInstance":"v4","%Name":"inst_2C561D1D","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_2C561D1D","objectId":{"name":"obj_token","path":"objects/obj_token/obj_token.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":5616.0,"y":2400.0,},
         {"$GMRInstance":"v4","%Name":"inst_5E7FE4AD","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5E7FE4AD","objectId":{"name":"obj_token","path":"objects/obj_token/obj_token.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":5584.0,"y":2400.0,},
+        {"$GMRInstance":"v4","%Name":"inst_5AF1D56F","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5AF1D56F","objectId":{"name":"obj_winning_point","path":"objects/obj_winning_point/obj_winning_point.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":2.0,"scaleY":2.0,"x":6944.0,"y":2176.0,},
       ],"layers":[],"name":"Entities","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Hazards","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v4","%Name":"inst_786B8CE9","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_786B8CE9","objectId":{"name":"obj_spike","path":"objects/obj_spike/obj_spike.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":2080.0,"y":1312.0,},
