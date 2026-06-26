@@ -24,7 +24,7 @@ for (var _i = 0; _i < array_length(_probs); _i++) {
     _cumulative += _probs[_i];
     if (_mapped <= _cumulative) {
         choice_index = _i;
-        show_debug_message("Rolled: " + string(current_probability) + " | Chose: " + abilities[_i].name + " (index " + string(_i) + ")");
+        show_debug_message("Rolled: " + string(current_probability) + " | Chose: " + global.abilities[_i].name + " (index " + string(_i) + ")");
         break;
     }
 }

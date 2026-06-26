@@ -117,25 +117,26 @@ build_ability_panel = function() {
 	var _b = [10, 40, 100, 30];
 	var _i = 0; // Used to placehold the vertical position on the panel.
 	for (var _j = 0; _j < array_length(global.abilities); _j++) {
-		if (!global.abilities[_i].bought) { continue; }
+		if (!global.abilities[_j].bought) { show_debug_message(global.abilities[_j].name);continue; }
 		var _add =		_panel.add(new UIButton(global.abilities[_i].name+"_add", _b[0], _b[1]+40*_i, _b[1], _b[1], "+", blue_button00));
 		_add.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, 1)}));
 		var _subtract = _panel.add(new UIButton(global.abilities[_i].name+"_subtract", _b[0]+50, _b[1]+40*_i, _b[1], _b[1], "-", blue_button00));
 		_subtract.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, -1)}));
 		
-		var _button = _panel.add(new UICheckbox(global.abilities[_i].name, _b[0]+100, _b[1]+40*_i, "", grey_boxCheckmark, grey_box, global.abilities[_i].enabled, UI_RELATIVE_TO.TOP_LEFT));
+		var _button = _panel.add(new UICheckbox(global.abilities[_j].name, _b[0]+100, _b[1]+40*_i, "", grey_boxCheckmark, grey_box, global.abilities[_i].enabled, UI_RELATIVE_TO.TOP_LEFT));
 		_button
 			.setTextFormatFalse("[c_black][fa_left]")
 			.setTextFormatTrue("[c_black][fa_left]")
-			.setTextFalse(global.abilities[_i].name)
-			.setTextTrue(global.abilities[_i].name + " " + string(global.abilities[_i].weight))
-			.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {
-		        var _checked = ui_get(global.abilities[_i].name).getValue();
-		        show_debug_message("Checkbox " + string(_i) + " is: " + string(_checked));
-				obj_wheel.set_ability_enable(_i, _checked);
+			.setTextFalse(global.abilities[_j].name)
+			.setTextTrue(global.abilities[_j].name + " " + string(global.abilities[_j].weight))
+			.setCallback(UI_EVENT.LEFT_RELEASE, method({_j}, function() {
+		        var _checked = ui_get(global.abilities[_j].name).getValue();
+		        show_debug_message("Checkbox " + string(_j) + " is: " + string(_checked));
+				obj_wheel.set_ability_enable(_j, _checked);
 			}));
 		_i++;
 	}
+	show_debug_message(string(_i));
 	_i++;
 	
 	// THE WHEEL!!!
