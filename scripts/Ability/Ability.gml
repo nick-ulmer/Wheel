@@ -27,6 +27,8 @@ global.abilities = [
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			speed_multiplier = 2;
+			friction_multiplier = 5;
+			air_handling_multiplier = 4;
 		}}
 	}),
 	new Ability("Explode", 20, "Explode - Self explanatory (or maybe not...)", function() {
@@ -39,13 +41,6 @@ global.abilities = [
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			friction_multiplier = 0.1;
-		}}
-	}),
-	new Ability("Increased Handling", 55, "Handling - Better control", function() {
-		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
-		if (instance_exists(obj_player)) { with (obj_player) {
-			friction_multiplier = 5;
-			air_handling_multiplier = 4;
 		}}
 	}), 
 	new Ability("Invincibility", 100, "Handling - Better control", function() {

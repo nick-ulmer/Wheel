@@ -167,10 +167,11 @@ build_ability_panel = function() {
 }
 
 // DRAWS the wheel within the context of a surface
-wheel_panel = function() {
-	var _x = 100;
-	var _y = 100;
-	draw_circle(_x, _y, 100, true);
+debug_wheel_panel = function() {
+	var _x = 128;
+	var _y = 128;
+	//draw_circle(_x, _y, 100, true);
+	draw_sprite(spr_wheel, 0, _x, _y);
 	
 	
 	var _probs = get_ability_probabilities();
@@ -213,6 +214,8 @@ wheel_panel = function() {
 	draw_line(_x, _y, _x + cos(_needle_angle) * 100, _y - sin(_needle_angle) * 100);
 	draw_set_color(c_yellow);
 }
+
+
 // Initialize Entropy
 update_entropy(false);
 build_ability_panel();

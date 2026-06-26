@@ -1,5 +1,5 @@
-var _cw = 200;
-var _ch = 200;
+var _cw = 256;
+var _ch = 256;
 
 if (!surface_exists(wheel_surf)) {
     wheel_surf = surface_create(_cw, _ch);
@@ -14,10 +14,11 @@ surface_set_target(wheel_surf);
 
 draw_set_colour(c_black);
 draw_set_alpha(1);
-draw_rectangle(0, 0, _cw, _ch, false);
+//draw_rectangle(0, 0, _cw, _ch, false);
 
-draw_circle(20, 20, 10, true);
-wheel_panel();
+
+//draw_circle(20, 20, 10, true);
+debug_wheel_panel();
 
 gpu_set_blendmode(bm_normal);
 draw_set_alpha(1);
