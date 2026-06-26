@@ -1,0 +1,1 @@
+tutorial_menu = t_checkpoint;

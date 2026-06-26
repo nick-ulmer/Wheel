@@ -106,7 +106,7 @@ function damage(_amount = 1, _direction = 0){
     xs[force.damaged] = (lengthdir_x(10, _direction + 90) + lengthdir_x(random(10) - 5, _direction)) * knockback_multiplier*0.5;
 	ys[force.damaged] = (lengthdir_y(10, _direction + 90) + lengthdir_y(random(10) - 5, _direction)) * knockback_multiplier*0.5;
     knockback_timer = knockback_timer_max;
-    
+    part_particles_create(global.fx_sys, x, y, global.fx_hurt, 20);
     if (hp <= 0) {
 		hp = 5;
 		x = global.checkpoint_x;
