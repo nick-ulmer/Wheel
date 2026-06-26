@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"jump_snd",
+  "%Name":"token1_snd",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,9 +10,9 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":0.3469161,
+  "duration":0.99977326,
   "exportDir":"",
-  "name":"jump_snd",
+  "name":"token1_snd",
   "parent":{
     "name":"Wheel",
     "path":"Wheel.yyp",
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"jump_snd.wav",
-  "volume":0.5,
+  "soundFile":"token1_snd.wav",
+  "volume":0.25,
 }
