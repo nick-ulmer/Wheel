@@ -2,7 +2,6 @@
 if (hp <= 0) { return; } // Guard Clause; 
 // Probably replace guard clause with instance destroy then return
 // And create a new dead player object probably 
-
 // Remove invincibility frame if above 0
 if (invincibility_frames > 0) { invincibility_frames --; flash_timer ++; }
 
