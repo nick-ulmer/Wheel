@@ -1,10 +1,23 @@
 /// @description Initialize
-tokens = 0;
 
-add_tokens = function(_value = 1) {
-	tokens += _value;
-	show_debug_message(string(_value) + " tokens added for a total of " + string(tokens));
+var _minutes = 0; // Minutes
+switch(room) {
+	case rm_lvl_0: _minutes = 3; break;
+	case rm_lvl_1: _minutes = 1; break;
+	case rm_lvl_2: _minutes = 2; break;
+	case rm_lvl_3: _minutes = 3; break;
+	//case rm_lvl_4: _minutes = 3; break;
+	case rm_lvl_5: _minutes = 5; break;
 }
+game_timer = game_get_speed(gamespeed_fps) * 60 * _minutes; // active timer that gets ticked down
+level_time = game_timer; // records the time in the level. 
+timer_text = function(_ticks) {
+    var _seconds = _ticks div game_get_speed(gamespeed_fps);
+    var _minutes = _seconds div 60;
+    _seconds = _seconds mod 60;
+    return string(_minutes) + ":" + string_format(_seconds, 2, 0);
+}
+
 
 game_paused = false;
 

@@ -1,59 +1,66 @@
-function Ability(_name, _weight, _text = "", _activated = function() {}) constructor {
+function Ability(_name, _cost, _text = "", _activated = function() {}) constructor {
 	self.name =_name;
+	self.cost = _cost;
 	self.text = _text;
-	self.cost = 50;
 	self.activated = _activated;
 	
 	// Attributes that save and load
-	self.weight = _weight;
+	self.weight = 1;
 	self.enabled = true;
 	self.bought = false;
 }
 
 global.abilities = [
-	new Ability("High Gravity", 1, "High Gravity - Fall faster than normal", function() {
+	new Ability("High Gravity", 10, "High Gravity - Fall faster than normal", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			gravRate = gravRateHigh;
 		}}
 	}),
-	new Ability("Low Gravity", 1, "Low Gravity - Fall slower than normal", function() {
+	new Ability("Low Gravity", 50, "Low Gravity - Fall slower than normal", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			gravRate = gravRateLow;
 		}}
 	}),
-	new Ability("Speed Boost", 1, "Speed Boost - Roll faster than normal", function() {
+	new Ability("Speed Boost", 40, "Speed Boost - Roll faster than normal", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			speed_multiplier = 2;
 		}}
 	}),
-	new Ability("Explode", 1, "Explode - Self explanatory (or maybe not...)", function() {
+	new Ability("Explode", 20, "Explode - Self explanatory (or maybe not...)", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			damage(1, 0);
 		}}
 	}),
-	new Ability("Slippery", 1, "Slippery - Slippy slippy slippy", function() {
+	new Ability("Slippery", 20, "Slippery - Slippy slippy slippy", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			friction_multiplier = 0.1;
 		}}
 	}),
-	new Ability("Increased Handling", 1, "Handling - Better control", function() {
+	new Ability("Increased Handling", 55, "Handling - Better control", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			friction_multiplier = 5;
 			air_handling_multiplier = 4;
 		}}
+	}), 
+	new Ability("Invincibility", 100, "Handling - Better control", function() {
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
+		if (instance_exists(obj_player)) { with (obj_player) {
+			invincibility_frames = invincibility_frames_max * 10; // 10 seconds of invincibility
+		}}
+	}), 
+	new Ability("Health Boost", 75, "Handling - Better control", function() {
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
+		if (instance_exists(obj_player)) { with (obj_player) {
+			hp ++;
+		}}
 	})
 ]
-show_debug_message(global.abilities[0].text);
-global.abilities[0].bought = true;
-global.abilities[0].cost = 20;
-global.abilities[1].bought = true;
-global.abilities[1].cost = 75;
 
 function save_abilities() {
     var _data = {};

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_solid",
   "parent":{
-    "name":"Wheel",
-    "path":"Wheel.yyp",
+    "name":"Utility",
+    "path":"folders/Utility.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

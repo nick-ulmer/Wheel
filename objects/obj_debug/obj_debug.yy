@@ -8,8 +8,8 @@
   "name":"obj_debug",
   "overriddenProperties":[],
   "parent":{
-    "name":"Wheel",
-    "path":"Wheel.yyp",
+    "name":"Utility",
+    "path":"folders/Utility.yy",
   },
   "parentObjectId":null,
   "persistent":false,

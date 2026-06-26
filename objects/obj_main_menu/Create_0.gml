@@ -39,10 +39,16 @@ level_select = function() {
 	var _panel = new UIPanel("LevelSelect_Panel", 0, 0, getUIRelScale(2), getUIRelScale(4), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
 	_panel.setResizable(true).setImageAlpha(0.75).setTitle("Level Select").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 
+	var _j = 0;
+	for (var _i = 0; _i < array_length(global.levels); _i++) {
+		var _lvl = _panel.add(lvlButton(global.levels[_i].name, global.levels[_i].room, 0, 50+_i*80, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
+		_j = _i
+	}
+/*
 	var _lvl0 = _panel.add(lvlButton("_lvl0",rm_lvl_0, 0, 50, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
 	var _lvl5 = _panel.add(lvlButton("_lvl5",rm_lvl_5, 0, 130, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
 	var _lvlTEST = _panel.add(lvlButton("_lvlTEST",rm_lvlTEST, 0, 210, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
-
+*/
 	var _back_button = new UIButton("Back_Button", 0, -20, _btn_w, _btn_h, "Back", spr_button, UI_RELATIVE_TO.BOTTOM_CENTER);
 	_back_button
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
@@ -50,6 +56,10 @@ level_select = function() {
 			main_menu();
 		});
 	_panel.add(_back_button);
+	
+	//_panel.set
+	// TODO: panel set height based on how many levels there are. 
+	// ALTERNATIVE: make a scrolling menu
 }
 
 main_menu();

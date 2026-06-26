@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"Aesthetic",
+  "%Name":"Level",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"Aesthetic",
+  "name":"Level",
   "parent":{
     "name":"Utility",
     "path":"folders/Utility.yy",
