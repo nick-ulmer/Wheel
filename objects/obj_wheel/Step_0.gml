@@ -1,10 +1,3 @@
-
-/*if CONSTANT_SPIN_MODE { // START CONSTANT SPIN MODE
-	
-	
-// END CONSTANT SPIN MODE
-} else { // START NORMAL SPIN MODE
-*/
 if spin_speed <= 0 {
 	if (!ability_activated) {
 		var _abilities = get_enabled_abilities();
@@ -34,4 +27,3 @@ for (var _i = 0; _i < array_length(_probs); _i++) {
         break;
     }
 }
-//} // END NORMAL SPIN MODE
