@@ -9,13 +9,23 @@ main = function() {
 	var _panel = new UIPanel("Shop_Panel", 0, 0, getUIRelScale(7), getUIRelScale(5), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
 	_panel.setResizable(true).setImageAlpha(0.75).setTitle("The Shop").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 	
-	var _main_menu_button = new UIButton("_main_menu_button", 0, -50, 100, 50, "Main Menu", spr_btn_small, UI_RELATIVE_TO.BOTTOM_CENTER);
+	var _main_menu_button = _panel.add(new UIButton("_main_menu_button", 0, -50, 100, 50, "Main Menu", spr_btn_small, UI_RELATIVE_TO.BOTTOM_CENTER));
 	_main_menu_button
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("Shop_Panel").destroy();
 			room_goto(rm_main_menu);
 		});
-	_panel.add(_main_menu_button);
+	
+	if (global.goto_shop) {
+		_main_menu_button.setDimensions(-55);
+		var _next_lvl = _panel.add(new UIButton("_next_lvl", 55, -50, 100, 50, "Next Level", spr_btn_small_green, UI_RELATIVE_TO.BOTTOM_CENTER));
+		_next_lvl
+			.setCallback(UI_EVENT.LEFT_RELEASE, function() {
+				ui_get("Shop_Panel").destroy();
+				room_goto(global.levels[global.next_level_index].room);
+			});
+		global.goto_shop = false;
+	}
 	
 	// RESET
 	a_bought = [];
@@ -30,13 +40,14 @@ main = function() {
 		}
 	}
 	
-	_panel.add(new UIText("shop", -100, 30, "Shop", UI_RELATIVE_TO.TOP_CENTER))
-	_panel.add(new UIText("bought", 100, 30, "Bought", UI_RELATIVE_TO.TOP_CENTER))
+	var _a_off = 50;
+	_panel.add(new UIText("shop", -100, _a_off, "Shop", UI_RELATIVE_TO.TOP_CENTER))
+	_panel.add(new UIText("bought", 100, _a_off, "Bought", UI_RELATIVE_TO.TOP_CENTER))
 		
 	
 	for (var _i = 0; _i < array_length(a_shop); _i++) {
 		var _text = global.abilities[a_shop[_i]].name + " - " + string(global.abilities[a_shop[_i]].cost);
-		var _a = _panel.add(new UIButton("shop_"+string(_i), -100, _i*30+50, 200, 25, _text, spr_btn_small, UI_RELATIVE_TO.TOP_CENTER))
+		var _a = _panel.add(new UIButton("shop_"+string(_i), -100, _i*30+_a_off+20, 200, 25, _text, spr_btn_small, UI_RELATIVE_TO.TOP_CENTER))
 		_a.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {
 			obj_shop.ability_buy_info(obj_shop.a_shop[_i]);
 			instance_destroy(obj_wheel);
@@ -44,7 +55,7 @@ main = function() {
 		}))
 	}
 	for (var _i = 0; _i < array_length(a_bought); _i++) {
-		var _a = _panel.add(new UIText("bought_"+string(_i), 100, _i*30+50, "- "+global.abilities[a_bought[_i]].name, UI_RELATIVE_TO.TOP_CENTER))
+		var _a = _panel.add(new UIText("bought_"+string(_i), 100, _i*30+_a_off+20, "- "+global.abilities[a_bought[_i]].name, UI_RELATIVE_TO.TOP_CENTER))
 		_a.setTextFormat("[fa_top]").setTextFormatMouseover("[fa_top]").setTextFormatClick("[fa_top]");
 		//var _a = _panel.add(new UIButton("bought_"+string(_i), 100, _i*30+30, 200, 25, global.abilities[a_bought[_i]].name, blue_button00, UI_RELATIVE_TO.TOP_CENTER))
 	}

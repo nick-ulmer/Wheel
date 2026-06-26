@@ -1,18 +1,23 @@
-function Level(_name, _room) constructor {
+global.goto_shop = false;
+global.next_level_index = 0;
+
+function Level(_name, _room, _max_timer_mins = 1) constructor {
 	self.name = _name;
 	self.room = _room; 
+	self.max_timer_mins = _max_timer_mins;
 	
 	// Attributes that save and load
 	self.completed = false;
-	self.min_time = 0;
+	self.min_time = 60 * 60 * 60 * 24;
 }
 
 global.levels = [
-	new Level("Tutorial", rm_lvl_0),
-	new Level("Level 1", rm_lvl_1),
-	new Level("Level 2", rm_lvl_2),
-	new Level("Level 3", rm_lvl_3),
-	new Level("Level 5", rm_lvl_5)
+	new Level("Tutorial", rm_lvl_0, 3),
+	new Level("Level 1", rm_lvl_1, 1),
+	new Level("Level 2", rm_lvl_2, 2),
+	new Level("Level 3", rm_lvl_3, 3),
+	new Level("Level 5", rm_lvl_5, 5),
+	new Level("Game Completed", rm_game_completed)
 ]
 
 function save_levels() {
@@ -30,6 +35,7 @@ function save_levels() {
     file_text_close(_file);
     show_debug_message("Levels saved");
 }
+save_levels();
 
 function load_levels() {
     if (!file_exists("levels.sav")) {
@@ -68,7 +74,22 @@ function getLevelByName(_name) {
     return undefined;
 }
 
+function getLevelIndexByRoom(_room) {
+	for (var i = 0; i < array_length(global.levels); i++) {
+        if (global.levels[i].room == _room) return i;
+    }
+    return undefined;
+}
+
 function setLevelCompleted(_room) {
-	getLevelByRoom(_room).completed = true;
+	var _lvl = getLevelByRoom(_room)
+	_lvl.completed = true;
+	
+	var _ticks = game_get_speed(gamespeed_fps) * 60 * _lvl.max_timer_mins;
+	var _new_time = _ticks - gm.game_timer;
+	if (_new_time < _lvl.min_time) {
+		_lvl.min_time = _new_time;
+	}
+	
 	save_levels();
 }

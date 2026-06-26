@@ -1,6 +1,6 @@
 /// @description Initialize
 
-var _minutes = 0; // Minutes
+/*var _minutes = 0; // Minutes
 switch(room) {
 	case rm_lvl_0: _minutes = 3; break;
 	case rm_lvl_1: _minutes = 1; break;
@@ -8,15 +8,12 @@ switch(room) {
 	case rm_lvl_3: _minutes = 3; break;
 	//case rm_lvl_4: _minutes = 3; break;
 	case rm_lvl_5: _minutes = 5; break;
-}
+}*/
+
+var _minutes = getLevelByRoom(room).max_timer_mins;
 game_timer = game_get_speed(gamespeed_fps) * 60 * _minutes; // active timer that gets ticked down
 level_time = game_timer; // records the time in the level. 
-timer_text = function(_ticks) {
-    var _seconds = _ticks div game_get_speed(gamespeed_fps);
-    var _minutes = _seconds div 60;
-    _seconds = _seconds mod 60;
-    return string(_minutes) + ":" + string_format(_seconds, 2, 0);
-}
+
 
 
 game_paused = false;
@@ -96,7 +93,7 @@ game_win = function() {
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("Game_Win").destroy();
 			ui_get("Panel_Abilities").destroy();
-			room_goto(rm_main_menu);
+			room_goto(rm_shop);
 		});
 		
 }

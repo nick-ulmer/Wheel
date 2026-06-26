@@ -42,20 +42,22 @@ level_select = function() {
 
 	var _j = 0;
 	for (var _i = 0; _i < array_length(global.levels); _i++) {
-		var _lvl = _panel.add(lvlButton(global.levels[_i].name, global.levels[_i].room, 0, 50+_i*80, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
+		var _lvl = global.levels[_i];
+		if (_lvl.room == rm_game_completed) continue;
 		
+		var _btn = _panel.add(lvlButton(_lvl.name, _lvl.room, 0, 50+_i*80, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
+		if (_lvl.completed) {
+			//var _txt = _panel.add(new UIText(_lvl.name+"_txt", _btn_w, 50+_i*80, _lvl.min_time, UI_RELATIVE_TO.TOP_CENTER));
+			_btn.setText(_lvl.name + " - " + TimerText(_lvl.min_time));
+		}
 		
 		if (_i >= 1 && !global.levels[_i-1].completed) {
-			_lvl.setEnabled(false);
+			_btn.setEnabled(false);
 		}
 		
 		_j = _i
 	}
-/*
-	var _lvl0 = _panel.add(lvlButton("_lvl0",rm_lvl_0, 0, 50, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
-	var _lvl5 = _panel.add(lvlButton("_lvl5",rm_lvl_5, 0, 130, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
-	var _lvlTEST = _panel.add(lvlButton("_lvlTEST",rm_lvlTEST, 0, 210, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
-*/
+
 	var _back_button = new UIButton("Back_Button", 0, -20, _btn_w, _btn_h, "Back", spr_button, UI_RELATIVE_TO.BOTTOM_CENTER);
 	_back_button
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
@@ -63,10 +65,6 @@ level_select = function() {
 			main_menu();
 		});
 	_panel.add(_back_button);
-	
-	//_panel.set
-	// TODO: panel set height based on how many levels there are. 
-	// ALTERNATIVE: make a scrolling menu
 }
 
 main_menu();
