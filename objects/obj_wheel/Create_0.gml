@@ -1,5 +1,7 @@
 /// @description 
 
+CONSTANT_SPIN_MODE = true;
+
 min_entropy = 10;
 entropy = 0; // Initialized at bottom of create script
 spins_left = 10;
@@ -8,6 +10,7 @@ current_probability = 0;
 choice_index = 0;
 
 var _spin_seconds = 3;
+if CONSTANT_SPIN_MODE _spin_seconds = 1;
 spin_friction = 0.05;
 
 spin_speed_max = spin_friction * _spin_seconds * game_get_speed(gamespeed_fps);
