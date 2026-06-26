@@ -6,9 +6,9 @@ update_ability_array = function() {
 }
 
 main = function() {
-	var _panel = new UIPanel("Shop_Panel", 0, 0, 1000, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_CENTER);
+	var _panel = new UIPanel("Shop_Panel", 0, 0, 650, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_CENTER);
 	_panel.setResizable(true).setImageAlpha(0.75).setTitle("The Shop").setTitleFormat("[c_black][fa_top]");
-
+	
 	var _main_menu_button = new UIButton("_main_menu_button", 0, -50, 100, 50, "Main Menu", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER);
 	_main_menu_button
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
@@ -82,10 +82,11 @@ ability_buy_info = function(_ability_index) {
 	
 	var _buy = _panel.add(new UIButton("ability_buy", 0, -110, 100, 50, "Buy It!!!", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER));
 	_buy.setCallback(UI_EVENT.LEFT_RELEASE, method({_ability_index}, function() {
+		
+		instance_create_layer(0, 0, "Instances", obj_wheel);
 		obj_wheel.buy_ability(_ability_index);
 		save_abilities();
 		obj_shop.main();
-		instance_create_layer(0, 0, "Instances", obj_wheel);
 		ui_get("Buy_Panel").destroy();
 	})).setSpriteDisabled(blue_button13);
 	if (global.tokens < global.abilities[_ability_index].cost) {

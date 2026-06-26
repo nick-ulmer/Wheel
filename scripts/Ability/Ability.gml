@@ -12,31 +12,37 @@ function Ability(_name, _weight, _text = "", _activated = function() {}) constru
 
 global.abilities = [
 	new Ability("High Gravity", 1, "High Gravity - Fall faster than normal", function() {
-		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;}
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			gravRate = gravRateHigh;
 		}}
 	}),
 	new Ability("Low Gravity", 1, "Low Gravity - Fall slower than normal", function() {
-		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;}
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			gravRate = gravRateLow;
 		}}
 	}),
 	new Ability("Speed Boost", 1, "Speed Boost - Roll faster than normal", function() {
-		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;}
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			speed_multiplier = 2;
 		}}
 	}),
 	new Ability("Explode", 1, "Explode - Self explanatory (or maybe not...)", function() {
-		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;}
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			damage(1, 0);
 		}}
 	}),
 	new Ability("Slippery", 1, "Slippery - Slippy slippy slippy", function() {
-		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;}
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
+		if (instance_exists(obj_player)) { with (obj_player) {
+			friction_multiplier = 0.1;
+		}}
+	}),
+	new Ability("Increased Handling", 1, "Handling - Better control", function() {
+		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			friction_multiplier = 0.1;
 		}}

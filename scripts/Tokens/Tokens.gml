@@ -1,6 +1,6 @@
 global.tokens = 0;
 function add_tokens(_value = 1) {
-	tokens += _value;
+	global.tokens += _value;
 	show_debug_message(string(_value) + " tokens added for a total of " + string(tokens));
 	save_tokens(); // MAYBE REMOVE if tokens only save after level completion
 }
