@@ -22,7 +22,6 @@ t_basic = function() {
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("tutorial").destroy();
 		});
-	
 }
 
 text_checkpoints = [

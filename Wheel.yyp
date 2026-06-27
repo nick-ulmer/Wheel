@@ -134,6 +134,7 @@
     {"id":{"name":"draw_text_scribble_ext","path":"scripts/draw_text_scribble_ext/draw_text_scribble_ext.yy",},},
     {"id":{"name":"draw_text_scribble","path":"scripts/draw_text_scribble/draw_text_scribble.yy",},},
     {"id":{"name":"Level","path":"scripts/Level/Level.yy",},},
+    {"id":{"name":"Particle","path":"scripts/Particle/Particle.yy",},},
     {"id":{"name":"scr_solid","path":"scripts/scr_solid/scr_solid.yy",},},
     {"id":{"name":"scr_UI_Button","path":"scripts/scr_UI_Button/scr_UI_Button.yy",},},
     {"id":{"name":"scr_UI_Canvas","path":"scripts/scr_UI_Canvas/scr_UI_Canvas.yy",},},
