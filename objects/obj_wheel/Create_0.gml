@@ -52,10 +52,20 @@ function reset_wheel() {
 function set_ability_enable(_index, _is_enabled) {
 	global.abilities[_index].enabled = _is_enabled;	
 	global.abilities[_index].weight = 1;	
+	
+	if (array_length(get_enabled_abilities()) < 2) {
+		global.abilities[0].enabled = true;
+	}
+	if (array_length(get_enabled_abilities()) < 2) {
+		global.abilities[1].enabled = true;
+	}
+	
 	ui_get(global.abilities[_index].name)
 		.setTextTrue(" " + global.abilities[_index].name + " " + string(global.abilities[_index].weight))
 	reset_wheel();
 	save_abilities();
+	
+	build_ability_panel();
 }
 
 function set_ability_weight(_index, _amount, _add = true) {

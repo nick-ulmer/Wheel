@@ -9,7 +9,7 @@ t_basic = function() {
 	var _t = "tutorial"
 	if ui_exists(_t) {ui_get(_t).destroy();}
 	
-	var _panel = new UIPanel(_t, 0, 0, getUIRelScale(7), getUIRelScale(2), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
+	var _panel = new UIPanel(_t, 0, 0, getUIRelScale(7), getUIRelScale(2), spr_ui, UI_RELATIVE_TO.BOTTOM_RIGHT);
 	_panel.setResizable(false).setImageAlpha(1).setTitle("The Basics").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 
 	for (var _i = 0; _i < array_length(text_basic); _i++) {
@@ -33,7 +33,7 @@ t_checkpoint = function() {
 	var _t = "tutorial"
 	if ui_exists(_t) {ui_get(_t).destroy();}
 	
-	var _panel = new UIPanel(_t, 0, 0, getUIRelScale(7), getUIRelScale(2), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
+	var _panel = new UIPanel(_t, 0, 0, getUIRelScale(7), getUIRelScale(2), spr_ui, UI_RELATIVE_TO.BOTTOM_RIGHT);
 	_panel.setResizable(false).setImageAlpha(1).setTitle("Checkpoints").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 
 	for (var _i = 0; _i < array_length(text_checkpoints); _i++) {
