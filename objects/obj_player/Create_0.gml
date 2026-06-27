@@ -23,7 +23,7 @@ x_move = 0; // horizontal movement input after calculation
 y_move = 0; // vertical movement input after calculation
 spd = 8; // horizontal movement input
 global.checkpoint_x = x;
-global.checkpoint_x = y;
+global.checkpoint_y = y;
 
 // Jump
 jspd = 10; // The jumping velocity

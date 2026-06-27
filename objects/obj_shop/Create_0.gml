@@ -1,13 +1,9 @@
 a_bought = []; // Holds list of unlocked abiilties via index of global.abilities
 a_shop = []; // Holds list of LOCKED abiilties via index of global.abilities
 
-update_ability_array = function() {
-	
-}
-
 main = function() {
-	var _panel = new UIPanel("Shop_Panel", 0, 0, getUIRelScale(7), getUIRelScale(5), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
-	_panel.setResizable(true).setImageAlpha(0.75).setTitle("The Shop").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
+	var _panel = new UIPanel("Shop_Panel", -120, 0, getUIRelScale(7), getUIRelScale(5), spr_ui, UI_RELATIVE_TO.MIDDLE_RIGHT);
+	_panel.setResizable(false).setImageAlpha(0.75).setTitle("The Shop").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 	
 	var _main_menu_button = _panel.add(new UIButton("_main_menu_button", 0, -50, 100, 50, "Main Menu", spr_btn_small, UI_RELATIVE_TO.BOTTOM_CENTER));
 	_main_menu_button

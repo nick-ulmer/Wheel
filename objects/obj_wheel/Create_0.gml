@@ -37,8 +37,8 @@ function update_entropy(_update_text = true) {
     }
 	entropy = -_entropy
 	if _update_text {
-		ui_get("Entropy_Text")
-			.setText("Entropy: " + string(entropy))
+		if ui_exists("Entropy_Text") { ui_get("Entropy_Text")
+			.setText("Entropy: " + string(entropy)) }
 	}
 }
 
@@ -53,8 +53,9 @@ function set_ability_enable(_index, _is_enabled) {
 	global.abilities[_index].enabled = _is_enabled;	
 	global.abilities[_index].weight = 1;	
 	ui_get(global.abilities[_index].name)
-		.setTextTrue(global.abilities[_index].name + " " + string(global.abilities[_index].weight))
+		.setTextTrue(" " + global.abilities[_index].name + " " + string(global.abilities[_index].weight))
 	reset_wheel();
+	save_abilities();
 }
 
 function set_ability_weight(_index, _amount, _add = true) {
@@ -63,9 +64,10 @@ function set_ability_weight(_index, _amount, _add = true) {
 	_val = clamp(_val, 1, infinity);
 	global.abilities[_index].weight = _val;
 	reset_wheel();
+	save_abilities();
 	
 	ui_get(global.abilities[_index].name)
-		.setTextTrue(global.abilities[_index].name + " " + string(global.abilities[_index].weight))
+		.setTextTrue(" " + global.abilities[_index].name + " " + string(global.abilities[_index].weight))
 }
 
 function buy_ability(_index) {
@@ -122,25 +124,29 @@ build_ability_panel = function() {
 	    wheel_surf = surface_create(size, size);
 	}*/
 
-    var _panel = new UIPanel("Panel_Abilities", 50, 50, 300, 500, grey_panel, UI_RELATIVE_TO.TOP_LEFT);
-	_panel.setResizable(true).setImageAlpha(0.75).setTitle("Ability Wheel - Press \"E\" to Spin").setTitleFormat("[c_black][fa_top]");
+    /*var _panel = new UIPanel("Panel_Abilities", 50, 50, 300, 500, grey_panel, UI_RELATIVE_TO.TOP_LEFT);
+	_panel.setResizable(true).setImageAlpha(0.75).setTitle("Ability Options").setTitleFormat("[c_black][fa_top]");*/
+	
+	
+	var _panel = new UIPanel("Panel_Abilities", 50, 30, getUIRelScale(3), getUIRelScale(4), spr_ui, UI_RELATIVE_TO.TOP_LEFT);
+	_panel.setResizable(false).setImageAlpha(0.75).setTitle("Ability Options").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 	
 	// Check Mark Buttons
-	var _b = [10, 40, 100, 30];
+	var _b = [35, 40, 100, 30];
 	var _i = 0; // Used to placehold the vertical position on the panel.
 	for (var _j = 0; _j < array_length(global.abilities); _j++) {
 		if (!global.abilities[_j].bought) { show_debug_message(global.abilities[_j].name);continue; }
-		var _add =		_panel.add(new UIButton(global.abilities[_i].name+"_add", _b[0], _b[1]+40*_i, _b[1], _b[1], "+", blue_button00));
-		_add.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, 1)}));
-		var _subtract = _panel.add(new UIButton(global.abilities[_i].name+"_subtract", _b[0]+50, _b[1]+40*_i, _b[1], _b[1], "-", blue_button00));
-		_subtract.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, -1)}));
+		var _add =		_panel.add(new UIButton(global.abilities[_i].name+"_add", _b[0], _b[1]+40*_i, _b[1], _b[1], "+", spr_btn_small));
+		_add.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, 1)})).setTextFormat("[scale,2]");
+		var _subtract = _panel.add(new UIButton(global.abilities[_i].name+"_subtract", _b[0]+50, _b[1]+40*_i, _b[1], _b[1], "-", spr_btn_small));
+		_subtract.setCallback(UI_EVENT.LEFT_RELEASE, method({_i}, function() {obj_wheel.set_ability_weight(_i, -1)})).setTextFormat("[scale,2]");
 		
 		var _button = _panel.add(new UICheckbox(global.abilities[_j].name, _b[0]+100, _b[1]+40*_i, "", grey_boxCheckmark, grey_box, global.abilities[_i].enabled, UI_RELATIVE_TO.TOP_LEFT));
 		_button
-			.setTextFormatFalse("[c_black][fa_left]")
-			.setTextFormatTrue("[c_black][fa_left]")
-			.setTextFalse(global.abilities[_j].name)
-			.setTextTrue(global.abilities[_j].name + " " + string(global.abilities[_j].weight))
+			.setTextFormatFalse("[c_white][fa_left]")
+			.setTextFormatTrue("[c_white][fa_left]")
+			.setTextFalse(" "+global.abilities[_j].name)
+			.setTextTrue(" "+global.abilities[_j].name + " " + string(global.abilities[_j].weight))
 			.setCallback(UI_EVENT.LEFT_RELEASE, method({_j}, function() {
 		        var _checked = ui_get(global.abilities[_j].name).getValue();
 		        show_debug_message("Checkbox " + string(_j) + " is: " + string(_checked));
@@ -156,21 +162,23 @@ build_ability_panel = function() {
 	var _canvas = new UICanvas("Wheel_Canvas", 0, 0, size, size, wheel_surf, UI_RELATIVE_TO.BOTTOM_LEFT)
 	_wheel_group.add(_canvas);
 	_panel.add(_wheel_group);*/
-	
+
+/*	
 	// Entropy Text
 	var _entropy_text = new UIText("Entropy_Text", 0, 0, "Entropy: " + string(entropy), UI_RELATIVE_TO.BOTTOM_RIGHT);
 	_panel.add(_entropy_text).setTextFormat("[c_black][fa_right][fa_bottom]");
 	
 	var _min_entropy_text = new UIText("Min_Entropy_Text", 0, -20, "Minimum Entropy: " + string(min_entropy), UI_RELATIVE_TO.BOTTOM_RIGHT);
 	_panel.add(_min_entropy_text).setTextFormat("[c_black][fa_right][fa_bottom]");
-	
+*/
+/*	
 	var _save = _panel.add(new UIButton("Save_Button", 0, 0, 30, 30, "S", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER));
 		_save.setCallback(UI_EVENT.LEFT_RELEASE, method({}, function() {save_abilities();}));
 	
 	var _load = _panel.add(new UIButton("Load_Button", 0, -30, 30, 30, "L", blue_button00, UI_RELATIVE_TO.BOTTOM_CENTER));
 		_load.setCallback(UI_EVENT.LEFT_RELEASE, method({}, function() {load_abilities(); obj_wheel.reset_wheel(); obj_wheel.build_ability_panel();}));
-	
-	_panel.setMinHeight(200 + _i*40).setMinWidth(300);
+*/
+	//_panel.setMinHeight(30+_i*40).setMinWidth(300).setDimensions(50, 50, 300, 30+_i*40);
 }
 
 // DRAWS the wheel within the context of a surface
@@ -185,7 +193,6 @@ the_wheel = function() {
 	if (array_length(_probs) == 0) return; // GUARD CLAUSE: Don't draw if no enabled abilities
 
 	
-
 	// Draw dividing lines
 	var _count = array_length(_probs);
 	var _angle = 0;
@@ -204,7 +211,8 @@ the_wheel = function() {
 		//var _mid_angle = _angle - _slice * 0.5 - rot_offset;
 		draw_set_color(c_white);
 		draw_set_halign(fa_left); draw_set_valign(fa_middle);
-		draw_text_transformed(_x, _y, "  "+global.abilities[_i].name, 1, 1, ((_angle + _angle - _slice)/2) + rot_offset);
+		//draw_text_transformed(_x, _y, "  "+global.abilities[_i].name, 1, 1, ((_angle + _angle - _slice)/2) + rot_offset);
+		draw_text_transformed(_x, _y, "  "+get_enabled_abilities()[_i].name, 1, 1, ((_angle + _angle - _slice)/2) + rot_offset);
 		draw_set_halign(fa_left); draw_set_valign(fa_top);
 	}
 	
@@ -224,7 +232,8 @@ the_wheel = function() {
 	
 	draw_set_color(c_white);
 	draw_set_halign(fa_left); draw_set_valign(fa_middle);
-	draw_text_transformed(_x, _y, "  "+global.abilities[0].name, 1, 1, ((_probs[0]*360)/2) + rot_offset);
+	//draw_text_transformed(_x, _y, "  "+global.abilities[0].name, 1, 1, ((_probs[0]*360)/2) + rot_offset);
+	draw_text_transformed(_x, _y, "  "+get_enabled_abilities()[0].name, 1, 1, ((_probs[0]*360)/2) + rot_offset);
 	draw_set_halign(fa_left); draw_set_valign(fa_top);
 	
 	
