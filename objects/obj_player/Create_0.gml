@@ -100,7 +100,9 @@ function damage(_amount = 1, _direction = 0){
     if (invincibility_frames > 0) { return; }
     hp -= _amount;
     invincibility_frames = invincibility_frames_max;
-    
+	if(hp >=1){
+		 audio_play_sound(hit_snd,1,false);
+	}
     xs[force.damaged] = (lengthdir_x(10, _direction + 90) + lengthdir_x(random(10) - 5, _direction)) * knockback_multiplier*0.5;
 	ys[force.damaged] = (lengthdir_y(10, _direction + 90) + lengthdir_y(random(10) - 5, _direction)) * knockback_multiplier*0.5;
     knockback_timer = knockback_timer_max;
@@ -109,6 +111,7 @@ function damage(_amount = 1, _direction = 0){
 		hp = 5;
 		x = global.checkpoint_x;
 		y = global.checkpoint_y;
+		audio_play_sound(death_snd,1,false);
     }
 }
 

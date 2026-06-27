@@ -238,6 +238,8 @@
     {"id":{"name":"__shd_scribble_bake_outline_8dir","path":"shaders/__shd_scribble_bake_outline_8dir/__shd_scribble_bake_outline_8dir.yy",},},
     {"id":{"name":"__shd_scribble_bake_shadow","path":"shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy",},},
     {"id":{"name":"__shd_scribble","path":"shaders/__shd_scribble/__shd_scribble.yy",},},
+    {"id":{"name":"death_snd","path":"sounds/death_snd/death_snd.yy",},},
+    {"id":{"name":"hit_snd","path":"sounds/hit_snd/hit_snd.yy",},},
     {"id":{"name":"jump_snd","path":"sounds/jump_snd/jump_snd.yy",},},
     {"id":{"name":"level_snd","path":"sounds/level_snd/level_snd.yy",},},
     {"id":{"name":"token1_snd","path":"sounds/token1_snd/token1_snd.yy",},},
