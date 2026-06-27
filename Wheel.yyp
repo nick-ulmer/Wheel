@@ -384,6 +384,8 @@
     {"id":{"name":"spr_button","path":"sprites/spr_button/spr_button.yy",},},
     {"id":{"name":"spr_checker_button_original","path":"sprites/spr_checker_button_original/spr_checker_button_original.yy",},},
     {"id":{"name":"spr_flag","path":"sprites/spr_flag/spr_flag.yy",},},
+    {"id":{"name":"spr_gravity_down","path":"sprites/spr_gravity_down/spr_gravity_down.yy",},},
+    {"id":{"name":"spr_gravity_up","path":"sprites/spr_gravity_up/spr_gravity_up.yy",},},
     {"id":{"name":"spr_health","path":"sprites/spr_health/spr_health.yy",},},
     {"id":{"name":"spr_level","path":"sprites/spr_level/spr_level.yy",},},
     {"id":{"name":"spr_original","path":"sprites/spr_original/spr_original.yy",},},

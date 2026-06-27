@@ -19,6 +19,14 @@ control_check();
 if (invincibility) {
 	part_particles_create(global.fx_sys, x, y, global.fx_invincible, 3);
 }
+if (gravRate == gravRateLow) {
+	part_particles_create(global.fx_sys, x-10, y-25, global.fx_grav_down, 1);
+} else if (gravRate == gravRateHigh) {
+	part_particles_create(global.fx_sys, x-10, y-25, global.fx_grav_up, 1);
+}
+if (speed_plus) {
+	part_particles_create(global.fx_sys, x, y-10, global.fx_speed_up, 1);
+}
 
 if (h_move != 0) {
 	if (slippery) {
