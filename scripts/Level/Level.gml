@@ -12,11 +12,12 @@ function Level(_name, _room, _max_timer_mins = 1) constructor {
 }
 
 global.levels = [
-	new Level("Tutorial", rm_lvl_0, 3),
-	new Level("Level 1", rm_lvl_1, 1),
-	new Level("Level 2", rm_lvl_2, 2),
-	new Level("Level 3", rm_lvl_3, 3),
-	new Level("Level 5", rm_lvl_5, 5),
+	new Level("Tutorial", rm_lvl_0, 5),
+	new Level("Level 1", rm_lvl_1, 0.5),
+	new Level("Level 2", rm_lvl_2, 0.5),
+	new Level("Level 3", rm_lvl_3, 1),
+	new Level("Level 4", rm_lvl_4, 0.5),
+	new Level("Level 5", rm_lvl_5, 2),
 	new Level("Game Completed", rm_game_completed)
 ]
 
