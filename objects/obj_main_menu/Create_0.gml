@@ -37,7 +37,7 @@ level_select = function() {
 	var _size = getUIRelScale(4);
 	var _btn_w = getUIRelScale(1);
 	var _btn_h = getUIRelScale(0)*0.75;
-	var _panel = new UIPanel("LevelSelect_Panel", 0, 0, getUIRelScale(2), getUIRelScale(6), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
+	var _panel = new UIPanel("LevelSelect_Panel", 0, 0, getUIRelScale(2), getUIRelScale(7), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
 	_panel.setResizable(true).setImageAlpha(0.75).setTitle("Level Select").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 
 	var _j = 0;

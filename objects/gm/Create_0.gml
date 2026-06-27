@@ -76,7 +76,6 @@ game_win = function() {
 			ui_get("Game_Win").destroy();
 			ui_get("Panel_Abilities").destroy();
 			room_restart();
-			//room_goto(rm_main_menu);
 		});
 		
 	var _next_level = _panel.add(new UIButton("Goto_NextLevel_Button2", 0, 90, 200, 75, "Next Level", spr_button_green, UI_RELATIVE_TO.MIDDLE_CENTER));

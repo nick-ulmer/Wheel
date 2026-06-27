@@ -175,19 +175,12 @@ the_wheel = function() {
 	var _y = 128;
 	draw_sprite(spr_wheel, 0, _x, _y);
 	
+	var rot_offset = 0 - current_probability * 360;
+	
 	var _probs = get_ability_probabilities();
 	if (array_length(_probs) == 0) return; // GUARD CLAUSE: Don't draw if no enabled abilities
 
-	if spin_speed <= 0 {
-		// Draw filled slice for chosen ability
-		var _cumulative = 0;
-		for (var _i = 0; _i < choice_index; _i++) {
-		    _cumulative += _probs[_i];
-		}
-		draw_set_color(c_orange);
-		//draw_slice(_x, _y, _cumulative, _probs[choice_index]);
-		draw_set_color(c_white);
-	}
+	
 
 	// Draw dividing lines
 	var _count = array_length(_probs);
@@ -202,14 +195,29 @@ the_wheel = function() {
 			draw_set_color(wheel_red);
 		else
 			draw_set_color(wheel_black);
-		draw_slice(_x, _y, _angle-_slice, _angle);
+		draw_slice(_x, _y, _angle-_slice + rot_offset, _angle + rot_offset);
 		
-	    draw_set_color(c_yellow);
-	    //draw_line(_x, _y, _x + cos(_rad) * rad, _y - sin(_rad) * rad);
+		//var _mid_angle = _angle - _slice * 0.5 - rot_offset;
+		draw_set_color(c_white);
+		draw_set_halign(fa_left); draw_set_valign(fa_middle);
+		draw_text_transformed(_x, _y, "  "+global.abilities[_i].name, 1.25, 1.25, rot_offset);
+		draw_set_halign(fa_left); draw_set_valign(fa_top);
 	}
+	
 	draw_set_color(wheel_green);
-	draw_slice(_x, _y, 0, _probs[0]*360);
-
+	draw_slice(_x, _y, 0 + rot_offset, _probs[0]*360 + rot_offset);
+	
+	if spin_speed <= 0 {
+		// Draw filled slice for chosen ability
+		var _cumulative = 0;
+		for (var _i = 0; _i < choice_index; _i++) {
+		    _cumulative += _probs[_i];
+		}
+		draw_set_color(c_orange);
+		draw_slice(_x, _y, _cumulative*360 + rot_offset, _cumulative*360 + _probs[choice_index]*360 + rot_offset);
+		draw_set_color(c_white);
+	}
+	
 	// Draw needle
 	var _needle_angle = degtorad(current_probability * 360);
 	draw_set_color(c_orange);
