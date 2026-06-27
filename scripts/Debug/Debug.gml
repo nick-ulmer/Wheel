@@ -28,7 +28,6 @@ function Debug() {
 			show_debug_message("tokens reset");
 		});
 		
-		
 	var _reset_abilities = _panel.add(new UIButton("_reset_abilities", 0, 65, 150, 25, "Reset Abilites", blue_button00, UI_RELATIVE_TO.TOP_CENTER));
 	_reset_abilities
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
