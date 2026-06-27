@@ -17,6 +17,10 @@ if (knockback_timer > 0) {
 
 control_check();
 
+if (h_move != 0) {
+	part_particles_create(global.fx_sys, x, bbox_bottom, global.fx_run, 1);
+}
+
 spd = h_move*8 * speed_multiplier;
 if xs[force.move] > spd {
     xs[force.move] -= .1*friction_multiplier + ((scr_solid(x,y+1))*.5*friction_multiplier) + ((!scr_solid(x,y+1))*.5*air_handling_multiplier) + (xs[force.move] > 0 && spd < 0)*.4;
