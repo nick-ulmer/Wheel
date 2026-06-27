@@ -122,7 +122,7 @@ build_ability_panel = function() {
 	    wheel_surf = surface_create(size, size);
 	}*/
 
-    var _panel = new UIPanel("Panel_Abilities", 0, 0, 300, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_LEFT);
+    var _panel = new UIPanel("Panel_Abilities", 50, 50, 300, 500, grey_panel, UI_RELATIVE_TO.TOP_LEFT);
 	_panel.setResizable(true).setImageAlpha(0.75).setTitle("Ability Wheel - Press \"E\" to Spin").setTitleFormat("[c_black][fa_top]");
 	
 	// Check Mark Buttons

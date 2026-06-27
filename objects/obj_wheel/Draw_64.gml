@@ -16,7 +16,6 @@ draw_set_colour(c_black);
 draw_set_alpha(1);
 //draw_rectangle(0, 0, _cw, _ch, false);
 
-
 //draw_circle(20, 20, 10, true);
 the_wheel();
 
@@ -29,10 +28,14 @@ gpu_pop_state();
 if (room == rm_shop) {
 	// In shop!
 	
-	
+	var _offset = 50;
+	var _w = display_get_gui_width()
+	var _h = display_get_gui_height()
+	draw_surface(wheel_surf, _offset, _h-_ch - _offset);
 	
 	return;
 }
+
 // ==================================================
 
 draw_set_alpha(wheel_alpha);
