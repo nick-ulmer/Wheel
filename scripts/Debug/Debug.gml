@@ -1,4 +1,4 @@
-global.debug = false;
+global.debug = true;
 function Debug() {
 	if (ui_exists("Debug_Panel")) {
         ui_get("Debug_Panel").destroy();
@@ -25,6 +25,14 @@ function Debug() {
 				global.abilities[_i].bought = false;
 			}
 			show_debug_message("abilities reset. must buy again");
+		});
+	var _level_unlock = _panel.add(new UIButton("_level_unlock", 0, 95, 150, 25, "Unlock Levels", blue_button00, UI_RELATIVE_TO.TOP_CENTER));
+	_level_unlock
+		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
+			for (var _i = 0; _i < array_length(global.levels); _i++) {
+				global.levels[_i].completed = true;
+			}
+			show_debug_message("All levels unlocked");
 		});
 
 }

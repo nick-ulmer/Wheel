@@ -35,7 +35,6 @@ function save_levels() {
     file_text_close(_file);
     show_debug_message("Levels saved");
 }
-save_levels();
 
 function load_levels() {
     if (!file_exists("levels.sav")) {
