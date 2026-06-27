@@ -87,9 +87,13 @@ function setLevelCompleted(_room) {
 	
 	var _ticks = game_get_speed(gamespeed_fps) * 60 * _lvl.max_timer_mins;
 	var _new_time = _ticks - gm.game_timer;
+	show_debug_message("prev min time: " + string(_lvl.min_time));
+	show_debug_message("Level completed with time: " + string(_new_time));
 	if (_new_time < _lvl.min_time) {
+		show_debug_message("time beat!");
 		_lvl.min_time = _new_time;
 	}
+	
 	
 	save_levels();
 }

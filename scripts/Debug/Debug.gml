@@ -52,6 +52,7 @@ function Debug() {
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			for (var _i = 0; _i < array_length(global.levels); _i++) {
 				global.levels[_i].completed = false;
+				global.levels[_i].min_time = 60 * 60 * 60 * 24;
 			}
 			show_debug_message("All levels LOCKED");
 		});
