@@ -26,6 +26,7 @@ function Debug() {
 			}
 			show_debug_message("abilities reset. must buy again");
 		});
+		
 	var _level_unlock = _panel.add(new UIButton("_level_unlock", 0, 95, 150, 25, "Unlock Levels", blue_button00, UI_RELATIVE_TO.TOP_CENTER));
 	_level_unlock
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
@@ -34,5 +35,16 @@ function Debug() {
 			}
 			show_debug_message("All levels unlocked");
 		});
+		
+	var _reset_levels = _panel.add(new UIButton("_reset_levels", 0, 125, 150, 25, "_reset_levels", blue_button00, UI_RELATIVE_TO.TOP_CENTER));
+	_reset_levels
+		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
+			for (var _i = 0; _i < array_length(global.levels); _i++) {
+				global.levels[_i].completed = false;
+			}
+			show_debug_message("All levels LOCKED");
+		});
+		
+		
 
 }
