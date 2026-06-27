@@ -1,6 +1,10 @@
 /// @description 
-
 CONSTANT_SPIN_MODE = true;
+wheel_alpha = 0.5;
+
+if (room == rm_shop) {
+	CONSTANT_SPIN_MODE = false;
+}
 
 min_entropy = 10;
 entropy = 0; // Initialized at bottom of create script
@@ -114,9 +118,9 @@ build_ability_panel = function() {
         show_debug_message("Panel rebuilt");
     }
 	
-	if (!surface_exists(wheel_surf)) {
+	/*if (!surface_exists(wheel_surf)) {
 	    wheel_surf = surface_create(size, size);
-	}
+	}*/
 
     var _panel = new UIPanel("Panel_Abilities", 0, 0, 300, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_LEFT);
 	_panel.setResizable(true).setImageAlpha(0.75).setTitle("Ability Wheel - Press \"E\" to Spin").setTitleFormat("[c_black][fa_top]");
@@ -148,10 +152,10 @@ build_ability_panel = function() {
 	_i++;
 	
 	// THE WHEEL!!!
-    var _wheel_group = new UIGroup("Group_Wheel", 0, 0, size, size, undefined, UI_RELATIVE_TO.BOTTOM_LEFT);
+    /*var _wheel_group = new UIGroup("Group_Wheel", 0, 0, size, size, undefined, UI_RELATIVE_TO.BOTTOM_LEFT);
 	var _canvas = new UICanvas("Wheel_Canvas", 0, 0, size, size, wheel_surf, UI_RELATIVE_TO.BOTTOM_LEFT)
 	_wheel_group.add(_canvas);
-	_panel.add(_wheel_group);
+	_panel.add(_wheel_group);*/
 	
 	// Entropy Text
 	var _entropy_text = new UIText("Entropy_Text", 0, 0, "Entropy: " + string(entropy), UI_RELATIVE_TO.BOTTOM_RIGHT);
@@ -247,5 +251,6 @@ draw_slice = function(_x, _y, _slice_start, _slice_end, _alpha = 1) {
 
 // Initialize Entropy
 update_entropy(false);
-build_ability_panel();
+if (room == rm_shop) { build_ability_panel(); }
+
 

@@ -1,4 +1,5 @@
 if spin_speed <= 0 {
+	wheel_alpha = 0.5;
 	if (!ability_activated) {
 		var _abilities = get_enabled_abilities();
 		_abilities[choice_index].activated();

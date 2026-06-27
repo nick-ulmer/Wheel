@@ -1,5 +1,7 @@
 /// @description Spin the Wheel
-if spin_speed > 0 return;
+if spin_speed > 0 || room == rm_shop return;
+
+wheel_alpha = 1;
 
 ability_activated = false;
 show_debug_message("wheel spun!");

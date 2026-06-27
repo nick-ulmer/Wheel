@@ -1,4 +1,4 @@
-global.debug = true;
+global.debug = false;
 function Debug() {
 	if (ui_exists("Debug_Panel")) {
         ui_get("Debug_Panel").destroy();

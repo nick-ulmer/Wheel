@@ -21,7 +21,7 @@ build_pause_menu = function() {
 	_main_menu
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("Pause_Menu").destroy();
-			ui_get("Panel_Abilities").destroy();
+			//ui_get("Panel_Abilities").destroy();
 			room_goto(rm_main_menu);
 		});
 		
@@ -29,7 +29,7 @@ build_pause_menu = function() {
 	_restart_level
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("Pause_Menu").destroy();
-			ui_get("Panel_Abilities").destroy();
+			//ui_get("Panel_Abilities").destroy();
 			room_restart();
 		});
 }
@@ -43,7 +43,7 @@ game_over = function() {
 	_main_menu
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("Game_Over").destroy();
-			ui_get("Panel_Abilities").destroy();
+			//ui_get("Panel_Abilities").destroy();
 			room_goto(rm_main_menu);
 		});
 		
@@ -51,7 +51,7 @@ game_over = function() {
 	_restart_level
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("Game_Over").destroy();
-			ui_get("Panel_Abilities").destroy();
+			//ui_get("Panel_Abilities").destroy();
 			room_restart();
 			//room_goto(rm_main_menu);
 		});
@@ -66,7 +66,7 @@ game_win = function() {
 	_main_menu
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("Game_Win").destroy();
-			ui_get("Panel_Abilities").destroy();
+			//ui_get("Panel_Abilities").destroy();
 			room_goto(rm_main_menu);
 		});
 		
@@ -74,7 +74,7 @@ game_win = function() {
 	_restart_level
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("Game_Win").destroy();
-			ui_get("Panel_Abilities").destroy();
+			//ui_get("Panel_Abilities").destroy();
 			room_restart();
 		});
 		
@@ -82,7 +82,7 @@ game_win = function() {
 	_next_level
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			ui_get("Game_Win").destroy();
-			ui_get("Panel_Abilities").destroy();
+			//ui_get("Panel_Abilities").destroy();
 			room_goto(rm_shop);
 		});
 		
