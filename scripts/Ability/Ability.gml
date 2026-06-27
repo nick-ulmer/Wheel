@@ -56,6 +56,9 @@ global.abilities = [
 		}}
 	})
 ]
+global.abilities[0].bought = true;
+global.abilities[1].bought = true;
+
 
 function save_abilities() {
     var _data = {};

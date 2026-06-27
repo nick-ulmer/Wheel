@@ -68,6 +68,7 @@
     {"id":{"name":"obj_solid","path":"objects/obj_solid/obj_solid.yy",},},
     {"id":{"name":"obj_spike","path":"objects/obj_spike/obj_spike.yy",},},
     {"id":{"name":"obj_token","path":"objects/obj_token/obj_token.yy",},},
+    {"id":{"name":"obj_tutorial","path":"objects/obj_tutorial/obj_tutorial.yy",},},
     {"id":{"name":"obj_wheel","path":"objects/obj_wheel/obj_wheel.yy",},},
     {"id":{"name":"obj_winning_point","path":"objects/obj_winning_point/obj_winning_point.yy",},},
     {"id":{"name":"UI","path":"objects/UI/UI.yy",},},
