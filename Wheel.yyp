@@ -76,6 +76,7 @@
     {"id":{"name":"rm_lvl_1","path":"rooms/rm_lvl_1/rm_lvl_1.yy",},},
     {"id":{"name":"rm_lvl_2","path":"rooms/rm_lvl_2/rm_lvl_2.yy",},},
     {"id":{"name":"rm_lvl_3","path":"rooms/rm_lvl_3/rm_lvl_3.yy",},},
+    {"id":{"name":"rm_lvl_4","path":"rooms/rm_lvl_4/rm_lvl_4.yy",},},
     {"id":{"name":"rm_lvl_5","path":"rooms/rm_lvl_5/rm_lvl_5.yy",},},
     {"id":{"name":"rm_main_menu","path":"rooms/rm_main_menu/rm_main_menu.yy",},},
     {"id":{"name":"rm_shop","path":"rooms/rm_shop/rm_shop.yy",},},
@@ -425,6 +426,7 @@
     {"roomId":{"name":"rm_lvl_5","path":"rooms/rm_lvl_5/rm_lvl_5.yy",},},
     {"roomId":{"name":"rm_game_completed","path":"rooms/rm_game_completed/rm_game_completed.yy",},},
     {"roomId":{"name":"rm_wheel","path":"rooms/rm_wheel/rm_wheel.yy",},},
+    {"roomId":{"name":"rm_lvl_4","path":"rooms/rm_lvl_4/rm_lvl_4.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
