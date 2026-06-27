@@ -9,6 +9,17 @@ air_handling_multiplier = 1;
 
 image_index = 0;
 
+// Ability booleans
+function reset_abilities() {
+	plus_grav = false;
+	minus_grav = false;
+	speed_plus = false;
+	slippery = false;
+	invincibility = false;
+}
+reset_abilities();
+
+
 // Health and Damage
 hp_max = 5;
 hp = hp_max;

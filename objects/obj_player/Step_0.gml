@@ -16,6 +16,19 @@ if (knockback_timer > 0) {
 
 control_check();
 
+if (invincibility) {
+	part_particles_create(global.fx_sys, x, y, global.fx_invincible, 3);
+}
+
+if (h_move != 0) {
+	if (slippery) {
+		part_particles_create(global.fx_sys, x, bbox_bottom, global.fx_slip, 1);	
+	} else {
+		part_particles_create(global.fx_sys, x, bbox_bottom, global.fx_run, 1);	
+	}
+
+}
+
 spd = h_move*8 * speed_multiplier;
 if xs[force.move] > spd {
     xs[force.move] -= .1*friction_multiplier + ((scr_solid(x,y+1))*.5*friction_multiplier) + ((!scr_solid(x,y+1))*.5*air_handling_multiplier) + (xs[force.move] > 0 && spd < 0)*.4;

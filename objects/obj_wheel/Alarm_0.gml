@@ -7,6 +7,8 @@ if (instance_exists(obj_player)) {
 		gravRate = obj_player.gravRateNormal;
 		friction_multiplier = 1;
 		air_handling_multiplier = 1;
+		
+		reset_abilities();
 	}
 }
 
