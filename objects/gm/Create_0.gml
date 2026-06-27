@@ -6,6 +6,8 @@ level_time = game_timer; // records the time in the level.
 
 game_paused = false;
 
+game_over = false;
+
 build_pause_menu = function() {
 	if (ui_exists("Pause_Menu")) {
         ui_get("Pause_Menu").destroy();
@@ -33,7 +35,7 @@ build_pause_menu = function() {
 }
 
 game_over = function() {
-	
+	game_over = true;
 	var _panel = new UIPanel("Game_Over", 0, 0, getUIRelScale(2), getUIRelScale(2), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
 		_panel.setResizable(true).setTitle("You lose!").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 	 
@@ -56,8 +58,9 @@ game_over = function() {
 }
 
 game_win = function() {
+	game_over = true;
 	var _panel = new UIPanel("Game_Win", 0, 0, getUIRelScale(2), getUIRelScale(3), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
-		_panel.setResizable(true).setTitle("You lose!").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
+		_panel.setResizable(true).setTitle("You win!").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 	 
 	var _main_menu = _panel.add(new UIButton("Goto_MainMenu_Button2", 0, -90, 200, 75, "Main Menu", spr_button, UI_RELATIVE_TO.MIDDLE_CENTER));
 	_main_menu

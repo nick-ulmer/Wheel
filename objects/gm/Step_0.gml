@@ -1,3 +1,4 @@
+if (game_over) return;
 game_timer --;
 
 if game_timer <= 0 {
