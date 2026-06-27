@@ -39,6 +39,7 @@ if scr_solid(x,y+1) { // on ground
 	jumpTime = jumpTimeMax;
 	jumpTimer = jumpTimerMax;
 	if (space_key && !space_key_pressed) {
+		audio_play_sound(jump_snd,1,false);
 	    y-=1;
 		gravEnable = false;
 	    space_key_pressed = true;

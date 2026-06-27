@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"token2_snd",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.99977326,
+  "exportDir":"",
+  "name":"token2_snd",
+  "parent":{
+    "name":"Wheel",
+    "path":"Wheel.yyp",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"token2_snd.wav",
+  "volume":0.25,
+}
