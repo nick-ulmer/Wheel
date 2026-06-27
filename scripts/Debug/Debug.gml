@@ -10,14 +10,25 @@ function Debug() {
 	_token_add
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			global.add_tokens(1);
+			save_tokens();
 			show_debug_message("add tokens");
 		});
 	var _token_subtract = _panel.add(new UIButton("_token_subtract", 20, 35, 25, 25, "-", blue_button00, UI_RELATIVE_TO.TOP_CENTER));
 	_token_subtract
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
 			global.add_tokens(-1);
+			save_tokens();
 			show_debug_message("subtract tokens");
 		});
+	var _reset_tokens = _panel.add(new UIButton("_reset_tokens", 100, 35, 100, 25, "reset tokens", blue_button00, UI_RELATIVE_TO.TOP_CENTER));
+	_reset_tokens
+		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
+			global.tokens = 0;
+			save_tokens();
+			show_debug_message("tokens reset");
+		});
+		
+		
 	var _reset_abilities = _panel.add(new UIButton("_reset_abilities", 0, 65, 150, 25, "Reset Abilites", blue_button00, UI_RELATIVE_TO.TOP_CENTER));
 	_reset_abilities
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
@@ -44,7 +55,4 @@ function Debug() {
 			}
 			show_debug_message("All levels LOCKED");
 		});
-		
-		
-
 }

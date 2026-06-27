@@ -377,6 +377,7 @@
     {"id":{"name":"spr_original","path":"sprites/spr_original/spr_original.yy",},},
     {"id":{"name":"spr_platform","path":"sprites/spr_platform/spr_platform.yy",},},
     {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},},
+    {"id":{"name":"spr_pointer","path":"sprites/spr_pointer/spr_pointer.yy",},},
     {"id":{"name":"spr_solid_basic","path":"sprites/spr_solid_basic/spr_solid_basic.yy",},},
     {"id":{"name":"spr_tokens","path":"sprites/spr_tokens/spr_tokens.yy",},},
     {"id":{"name":"spr_ui_shadow","path":"sprites/spr_ui_shadow/spr_ui_shadow.yy",},},

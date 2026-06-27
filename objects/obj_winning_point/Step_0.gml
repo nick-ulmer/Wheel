@@ -9,5 +9,6 @@ if (!touched && place_meeting(x, y, obj_player)) {
 	var _x = gm.level_time - gm.game_timer;
 	
 	
+	save_tokens();
 	touched = true;
 }

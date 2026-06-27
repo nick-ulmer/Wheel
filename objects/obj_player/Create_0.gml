@@ -101,8 +101,8 @@ function damage(_amount = 1, _direction = 0){
     hp -= _amount;
     invincibility_frames = invincibility_frames_max;
     
-    xs[force.damaged] = (lengthdir_x(10, _direction + 90) + lengthdir_x(random(10) - 5, _direction)) * knockback_multiplier;
-	ys[force.damaged] = (lengthdir_y(10, _direction + 90) + lengthdir_y(random(10) - 5, _direction)) * knockback_multiplier;
+    xs[force.damaged] = (lengthdir_x(10, _direction + 90) + lengthdir_x(random(10) - 5, _direction)) * knockback_multiplier*0.5;
+	ys[force.damaged] = (lengthdir_y(10, _direction + 90) + lengthdir_y(random(10) - 5, _direction)) * knockback_multiplier*0.5;
     knockback_timer = knockback_timer_max;
     
     if (hp <= 0) {

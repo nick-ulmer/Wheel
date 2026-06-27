@@ -17,7 +17,9 @@ spin_speed_max = spin_friction * _spin_seconds * game_get_speed(gamespeed_fps);
 spin_speed = 0; // live variable
 ability_activated = true; // Also live
 
-//abilities =  global.abilities;
+wheel_red = #c30303;
+wheel_black = #1c1c1c;
+wheel_green = #06c313;
 
 function update_entropy(_update_text = true) {
     var _probs = get_ability_probabilities();
@@ -103,7 +105,8 @@ function get_enabled_abilities() {
 
 
 wheel_surf = -1;
-size = 200; // width/height of surface space
+size = 256; // width/height of surface space
+rad = size/2 - 13;
 
 build_ability_panel = function() {
     if (ui_exists("Panel_Abilities")) {
@@ -112,7 +115,7 @@ build_ability_panel = function() {
     }
 	
 	if (!surface_exists(wheel_surf)) {
-	    wheel_surf = surface_create(200, 200);
+	    wheel_surf = surface_create(size, size);
 	}
 
     var _panel = new UIPanel("Panel_Abilities", 0, 0, 300, 500, grey_panel, UI_RELATIVE_TO.MIDDLE_LEFT);
@@ -145,7 +148,7 @@ build_ability_panel = function() {
 	_i++;
 	
 	// THE WHEEL!!!
-    var _wheel_group = new UIGroup("Group_Wheel", 0, 0, 200, 200, undefined, UI_RELATIVE_TO.BOTTOM_LEFT);
+    var _wheel_group = new UIGroup("Group_Wheel", 0, 0, size, size, undefined, UI_RELATIVE_TO.BOTTOM_LEFT);
 	var _canvas = new UICanvas("Wheel_Canvas", 0, 0, size, size, wheel_surf, UI_RELATIVE_TO.BOTTOM_LEFT)
 	_wheel_group.add(_canvas);
 	_panel.add(_wheel_group);
@@ -167,12 +170,10 @@ build_ability_panel = function() {
 }
 
 // DRAWS the wheel within the context of a surface
-debug_wheel_panel = function() {
+the_wheel = function() {
 	var _x = 128;
 	var _y = 128;
-	//draw_circle(_x, _y, 100, true);
 	draw_sprite(spr_wheel, 0, _x, _y);
-	
 	
 	var _probs = get_ability_probabilities();
 	if (array_length(_probs) == 0) return; // GUARD CLAUSE: Don't draw if no enabled abilities
@@ -183,17 +184,9 @@ debug_wheel_panel = function() {
 		for (var _i = 0; _i < choice_index; _i++) {
 		    _cumulative += _probs[_i];
 		}
-		var _slice_start = _cumulative * 360;
-		var _slice_end = _slice_start + (_probs[choice_index] * 360);
-
 		draw_set_color(c_orange);
-		draw_primitive_begin(pr_trianglefan);
-		draw_vertex(_x, _y);
-		for (var _a = _slice_start; _a <= _slice_end; _a++) {
-		    draw_vertex(_x + cos(degtorad(_a)) * 100, _y - sin(degtorad(_a)) * 100);
-		}
-		draw_primitive_end();
-		draw_set_color(c_yellow);
+		//draw_slice(_x, _y, _cumulative, _probs[choice_index]);
+		draw_set_color(c_white);
 	}
 
 	// Draw dividing lines
@@ -202,19 +195,38 @@ debug_wheel_panel = function() {
 	for (var _i = 0; _i < _count; _i++) {
 	    var _slice = _probs[_i] * 360;
 	    var _rad = degtorad(_angle);
-	    draw_set_color(c_yellow);
-	    draw_line(_x, _y, _x + cos(_rad) * 100, _y - sin(_rad) * 100);
-	    draw_set_color(c_yellow);
+		
 	    _angle += _slice;
+		
+		if (_i mod 2 == 0)
+			draw_set_color(wheel_red);
+		else
+			draw_set_color(wheel_black);
+		draw_slice(_x, _y, _angle-_slice, _angle);
+		
+	    draw_set_color(c_yellow);
+	    //draw_line(_x, _y, _x + cos(_rad) * rad, _y - sin(_rad) * rad);
 	}
+	draw_set_color(wheel_green);
+	draw_slice(_x, _y, 0, _probs[0]*360);
 
 	// Draw needle
 	var _needle_angle = degtorad(current_probability * 360);
-	draw_set_color(c_red);
-	draw_line(_x, _y, _x + cos(_needle_angle) * 100, _y - sin(_needle_angle) * 100);
-	draw_set_color(c_yellow);
+	draw_set_color(c_orange);
+	//draw_line(_x, _y, _x + cos(_needle_angle) * rad, _y - sin(_needle_angle) * rad);
+	
+	draw_set_color(c_white);
+	draw_sprite(spr_pointer, 0, _x, _y);
 }
 
+draw_slice = function(_x, _y, _slice_start, _slice_end) {
+	draw_primitive_begin(pr_trianglefan);
+	draw_vertex(_x, _y);
+	for (var _a = _slice_start; _a <= _slice_end; _a++) {
+		draw_vertex(_x + cos(degtorad(_a)) * rad, _y - sin(degtorad(_a)) * rad);
+	}
+	draw_primitive_end();
+}
 
 // Initialize Entropy
 update_entropy(false);

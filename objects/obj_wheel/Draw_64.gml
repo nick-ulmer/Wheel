@@ -18,7 +18,7 @@ draw_set_alpha(1);
 
 
 //draw_circle(20, 20, 10, true);
-debug_wheel_panel();
+the_wheel();
 
 gpu_set_blendmode(bm_normal);
 draw_set_alpha(1);
