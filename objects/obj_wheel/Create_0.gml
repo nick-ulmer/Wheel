@@ -200,23 +200,32 @@ the_wheel = function() {
 		//var _mid_angle = _angle - _slice * 0.5 - rot_offset;
 		draw_set_color(c_white);
 		draw_set_halign(fa_left); draw_set_valign(fa_middle);
-		draw_text_transformed(_x, _y, "  "+global.abilities[_i].name, 1.25, 1.25, rot_offset);
+		draw_text_transformed(_x, _y, "  "+global.abilities[_i].name, 1, 1, ((_angle + _angle - _slice)/2) + rot_offset);
 		draw_set_halign(fa_left); draw_set_valign(fa_top);
 	}
 	
 	draw_set_color(wheel_green);
 	draw_slice(_x, _y, 0 + rot_offset, _probs[0]*360 + rot_offset);
 	
-	if spin_speed <= 0 {
+	if spin_speed > 0 {
 		// Draw filled slice for chosen ability
 		var _cumulative = 0;
 		for (var _i = 0; _i < choice_index; _i++) {
 		    _cumulative += _probs[_i];
 		}
-		draw_set_color(c_orange);
-		draw_slice(_x, _y, _cumulative*360 + rot_offset, _cumulative*360 + _probs[choice_index]*360 + rot_offset);
+		draw_set_color(c_white);
+		draw_slice(_x, _y, _cumulative*360 + rot_offset, _cumulative*360 + _probs[choice_index]*360 + rot_offset, 0.25);
 		draw_set_color(c_white);
 	}
+	
+	draw_set_color(c_white);
+	draw_set_halign(fa_left); draw_set_valign(fa_middle);
+	draw_text_transformed(_x, _y, "  "+global.abilities[0].name, 1, 1, ((_probs[0]*360)/2) + rot_offset);
+	draw_set_halign(fa_left); draw_set_valign(fa_top);
+	
+	
+	
+	
 	
 	// Draw needle
 	var _needle_angle = degtorad(current_probability * 360);
@@ -227,11 +236,11 @@ the_wheel = function() {
 	draw_sprite(spr_pointer, 0, _x, _y);
 }
 
-draw_slice = function(_x, _y, _slice_start, _slice_end) {
+draw_slice = function(_x, _y, _slice_start, _slice_end, _alpha = 1) {
 	draw_primitive_begin(pr_trianglefan);
-	draw_vertex(_x, _y);
+	draw_vertex_color(_x, _y, draw_get_color(), _alpha);
 	for (var _a = _slice_start; _a <= _slice_end; _a++) {
-		draw_vertex(_x + cos(degtorad(_a)) * rad, _y - sin(degtorad(_a)) * rad);
+		draw_vertex_color(_x + cos(degtorad(_a)) * rad, _y - sin(degtorad(_a)) * rad, draw_get_color(), _alpha);
 	}
 	draw_primitive_end();
 }

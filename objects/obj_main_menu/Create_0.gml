@@ -47,7 +47,6 @@ level_select = function() {
 		
 		var _btn = _panel.add(lvlButton(_lvl.name, _lvl.room, 0, 50+_i*80, _btn_w, _btn_h, UI_RELATIVE_TO.TOP_CENTER));
 		if (_lvl.completed) {
-			//var _txt = _panel.add(new UIText(_lvl.name+"_txt", _btn_w, 50+_i*80, _lvl.min_time, UI_RELATIVE_TO.TOP_CENTER));
 			_btn.setText(_lvl.name + " - " + TimerText(_lvl.min_time));
 		}
 		

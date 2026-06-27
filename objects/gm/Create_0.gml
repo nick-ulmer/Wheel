@@ -6,7 +6,7 @@ level_time = game_timer; // records the time in the level.
 
 game_paused = false;
 
-game_over = false;
+is_game_over = false;
 
 build_pause_menu = function() {
 	if (ui_exists("Pause_Menu")) {
@@ -35,7 +35,7 @@ build_pause_menu = function() {
 }
 
 game_over = function() {
-	game_over = true;
+	is_game_over = true;
 	var _panel = new UIPanel("Game_Over", 0, 0, getUIRelScale(2), getUIRelScale(2), spr_ui, UI_RELATIVE_TO.MIDDLE_CENTER);
 		_panel.setResizable(true).setTitle("You lose!").setTitleFormat("[c_white][fa_top]").setTitleOffset({x:0,y:15});
 	 

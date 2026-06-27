@@ -9,14 +9,14 @@ function Debug() {
 	var _token_add = _panel.add(new UIButton("_token_add", -20, 35, 25, 25, "+", blue_button00, UI_RELATIVE_TO.TOP_CENTER));
 	_token_add
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
-			global.add_tokens(1);
+			global.add_tokens(25);
 			save_tokens();
 			show_debug_message("add tokens");
 		});
 	var _token_subtract = _panel.add(new UIButton("_token_subtract", 20, 35, 25, 25, "-", blue_button00, UI_RELATIVE_TO.TOP_CENTER));
 	_token_subtract
 		.setCallback(UI_EVENT.LEFT_RELEASE, function() {
-			global.add_tokens(-1);
+			global.add_tokens(-25);
 			save_tokens();
 			show_debug_message("subtract tokens");
 		});

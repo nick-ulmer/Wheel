@@ -11,19 +11,19 @@ function Ability(_name, _cost, _text = "", _activated = function() {}) construct
 }
 
 global.abilities = [
-	new Ability("High Gravity", 10, "High Gravity - Fall faster than normal", function() {
+	new Ability("+ Gravity", 10, "High Gravity - Fall faster than normal", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			gravRate = gravRateHigh;
 		}}
 	}),
-	new Ability("Low Gravity", 50, "Low Gravity - Fall slower than normal", function() {
+	new Ability("- Gravity", 50, "Low Gravity - Fall slower than normal", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			gravRate = gravRateLow;
 		}}
 	}),
-	new Ability("Speed Boost", 40, "Speed Boost - Roll faster than normal", function() {
+	new Ability("Speed+", 40, "Speed Boost - Roll faster than normal", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			speed_multiplier = 2;
@@ -31,7 +31,7 @@ global.abilities = [
 			air_handling_multiplier = 4;
 		}}
 	}),
-	new Ability("Explode", 20, "Explode - Self explanatory (or maybe not...)", function() {
+	new Ability("Explode!", 20, "Explode - Self explanatory (or maybe not...)", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			damage(1, 0);
@@ -43,13 +43,13 @@ global.abilities = [
 			friction_multiplier = 0.1;
 		}}
 	}), 
-	new Ability("Invincibility", 100, "Handling - Better control", function() {
+	new Ability("Invincible", 100, "Handling - Better control", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			invincibility_frames = invincibility_frames_max * 10; // 10 seconds of invincibility
 		}}
 	}), 
-	new Ability("Health Boost", 75, "Handling - Better control", function() {
+	new Ability("Health+", 75, "Handling - Better control", function() {
 		with (obj_wheel) {alarm[0] = game_get_speed(gamespeed_fps) * 5;} // set alarm for 5 seconds
 		if (instance_exists(obj_player)) { with (obj_player) {
 			hp ++;
