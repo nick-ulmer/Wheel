@@ -22,6 +22,8 @@ minStep = 1; // smallest size of ledge
 x_move = 0; // horizontal movement input after calculation
 y_move = 0; // vertical movement input after calculation
 spd = 8; // horizontal movement input
+global.checkpoint_x = x;
+global.checkpoint_x = y;
 
 // Jump
 jspd = 10; // The jumping velocity
@@ -104,8 +106,9 @@ function damage(_amount = 1, _direction = 0){
     knockback_timer = knockback_timer_max;
     
     if (hp <= 0) {
-        show_debug_message("player is dead");
-		gm.game_over();
+		hp = 5;
+		x = global.checkpoint_x;
+		y = global.checkpoint_y;
     }
 }
 
